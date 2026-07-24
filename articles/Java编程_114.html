@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' cdnjs.cloudflare.com busuanzi.ibruce.info; style-src 'self' 'unsafe-inline' fonts.googleapis.com cdnjs.cloudflare.com; font-src 'self' fonts.gstatic.com; img-src 'self' data: https:; frame-ancestors 'none'; connect-src 'self' busuanzi.ibruce.info;">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://busuanzi.ibruce.info">
+<title>Java字符串处理与数组：正则匹配与倒序输出实战 - Alan's Blog</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" id="prism-theme" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+<script>
+// Theme toggle - light/dark
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  const prismTheme = document.getElementById('prism-theme');
+  if (theme === 'dark') {
+    prismTheme.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css';
+  } else {
+    prismTheme.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css';
+  }
+  localStorage.setItem('blog-theme', theme);
+}
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') || 'light';
+  const next = current === 'light' ? 'dark' : 'light';
+  applyTheme(next);
+}
+// Initialize from localStorage
+document.addEventListener('DOMContentLoaded', function() {
+  const saved = localStorage.getItem('blog-theme');
+  if (saved) {
+    applyTheme(saved);
+  } else {
+    applyTheme('dark');
+  }
+});
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+</head>
+<body>
+<div class="container">
+<header class="header">
+  <a href="../index.html" class="logo"><span class="terminal-icon">></span> Alan's <span class="accent">Blog</span></a>
+  <nav><a href="../index.html">HOME</a><a href="../index.html#articles">ARTICLES</a><a href="../about.html">ABOUT</a><button class="theme-toggle" onclick="toggleTheme()" title="切换主题">&#9788;</button></nav>
+</header>
+<main>
+<article class="article-full">
+  <div class="article-meta reveal">
+    <span class="category-tag">Java编程</span>
+    <span class="meta-item"><span class="meta-icon">&#128197;</span> 2024-10-22</span>
+    <span class="meta-item"><span class="meta-icon">&#9201;</span> 4 min read</span>
+    <span class="meta-item"><span class="meta-icon">&#9889;</span> <span class="diff-badge" style="background:#00ff41">入门</span></span>
+    <span class="meta-item"><span class="meta-icon">&#128214;</span> <span id="busuanzi_container_page_pv" class="page-reads">阅读 <span id="busuanzi_value_page_pv"></span></span></span>
+  </div>
+  <h1 class="article-title reveal">Java字符串处理与数组：正则匹配与倒序输出实战</h1>
+  <div class="article-body"><div class="table-wrapper"><table><tr><td><div style=""><span style="font-size:12pt;font-family:Tahoma">一、实验目的</span><span style="font-size:12pt;font-family:Tahoma">及要求</span></div> <div style="">1、掌握String类及相关方法的使用，能够使用正则表达式对字符串进行分解和匹配。</div> <div style="">2、掌握Java数组的声明和创建方法、掌握数组的应用。</div> <div style="">3、能够使用一维和二维数组进行简单运算。</div></td></tr><tr><td><div style=""><span style="font-size:12pt;font-family:Tahoma">二</span><span style="font-size:12pt;font-family:Tahoma">、</span><span style="font-size:12pt;font-family:Tahoma">实验原理与内容</span></div> <div style=""><span style="font-size:12pt;color:#0000FF">1</span><span style="font-size:12pt;color:#0000FF">、给定一行句子，每个词之间用空格隔开，要么是全小写英文单词，要么是全大写英文单词，要么是自然数。</span></div> <div style=""><span style="font-size:12pt;color:#0000FF">要求将这些单词倒序输出。而且对于每个单词，如果是小写词，应当转为大写</span><span style="font-size:12pt;color:#0000FF">;</span><span style="font-size:12pt;color:#0000FF">如果是大写词，应当转为小写</span><span style="font-size:12pt;color:#0000FF">; </span><span style="font-size:12pt;color:#0000FF">如果是自然数，应该倒转输出。</span></div> <div style=""><span style="font-size:12pt;color:#0000FF">例如：</span></div> <div style=""><span style="font-size:12pt;color:#0000FF">输入：</span><span style="font-size:12pt;color:#0000FF">WE will GO to 234 FLOOR at 17 pm</span></div> <div style=""><span style="font-size:12pt;color:#0000FF">输出：</span><span style="font-size:12pt;color:#0000FF">PM 71 AT floor 432 TO go WILL we </span></div> <div style=""><span style="font-size:12pt;color:#0000FF">编写程序要求要用到正则表达式。</span></div> <div style=""><span style="font-size:12pt">2</span><span style="font-size:12pt">、编写一个主类，至少包括</span><span style="font-size:12pt">3</span><span style="font-size:12pt">个方法。在</span><span style="font-size:12pt">main</span><span style="font-size:12pt">方法中，定义两个整数矩阵，分别调用矩阵加</span><span style="font-size:12pt">matrixAdd()</span><span style="font-size:12pt">和矩阵</span><span style="font-size:12pt">乘</span><span style="font-size:12pt">matrixMultiply()</span><span style="font-size:12pt">两个方法，输出运算结果。</span></div> <div style=""><span style="font-size:12pt">示例：计算下面两个矩阵的加法：</span></div> <div style=""><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAAxCAMAAAEzaUP9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJUExURQAAAMDAwAAAAA3T8akAAAADdFJOU///ANfKDUEAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJfSURBVFhH7ZSBbiMxCEST///pM9hgGDBsVq3aq/ZJER4GsONs9hV5S5gLiivVMOukvuvDOoktWCTt8qnGTGd3dHwy+y4wUeXe9XNW3xv6ZUl5+dwB5xIqxQNfwLToQ3lB1sG5dBQlrSH67h3cJ9uQc5dOwmemz6XqLyXZkVPpSTBJmj9p9W9EToonvqqTfl1FayJ5Db7gPPq9lhKNxXS+6pP/Tcxd2lMJJx375VWdfHFZYFirCfZpG6E5DhoXoQX80If+tzBOM7c57XpVZ/2FxUhegy8oRstKrRmE/q4P8Ro4DQm7fTb+l7EOf7xK0er7AuwztqYOv8P+t3IwdQL2bf/sTCCPp676pWWGgfEGqrTO+7sCo55iRw5K9H2BSIwPGXCHcFd6d2LjZYJv+1dpcNaie65FYRyEVo2ymEHiR0+IrGfUU/lgtGYYPRpEYm2T7jqQU2IUsA/sB8O+Qw7hrlSr7wuwz9jVL0xofqWPPkRmpVYGT6WVB39/ax8JadkLh0qsE0RiHEgLRKE6FYF9YD88/BT+USRlM6iR6CeqGID9nV7EFGaSJof3gxp/4HoA2p0e9CVJk6Hu5xPXA5oJUQ98ipTNoEain6hiAPZ3+uHhr+LeSOGhb/4F8Y+SqGoGep1mRtLmL/SElE8E5d/TpIz21b1m5gzvWEnrwh6ABM3DbYq325qW3q61cqtpEf1EFQOwv9MPD38SfsjNk44PPmok+okqBmB/pzcmG99Qp6aN94NyrziELGt3WnC5IXCPrMeAttd84npCPSBqwudIxcyZrp5VOQLNTv9XvF7/AJ2aA1ucwql0AAAAAElFTkSuQmCC" alt="img" loading="lazy"><span style="font-size:12pt">，输出如图结果：</span></div> <div style=""><span style="font-size:12pt">计算下面两个矩阵的乘法：</span></div> <div style=""><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAA1CAMAAAGo+AHrAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJUExURQAAAMDAwAAAAA3T8akAAAADdFJOU///ANfKDUEAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKHSURBVFhH7ZSBcu0gCERv//+nq8AiLGrSdNrp7XjeNLgskJj47usGH3bVuKK7WjNWV2gNKu90TBhtdwap1694xHV13ARW6+on0DSRfIcHd8Qcb8XaEwbrO/QezDNkHRKs/wLtcT76I+GxLEoOsf2p7ldJiApRw6hW+cPg7uP5LIY/r0nPhHU0e2Ws+RnkLvE2tvZc0v0Co4Mq5Fi/KeEnRxb8K+l6hFQw6jVG3xbtTbmXgOY6w9saGrP/fmCjWNF2OO/age1l7tuivGt9dSU/tBbgHRf/XWlPrxvDlmg7vr8RUsXGx7sZ71CuAy+0wO/yyj+8OeNg5Ahce1j5GpNvKbOgB6YRvE7BKI/B55bhKNBcZ0BzbJS7WgSuPSx8i+wffgf+PPQVrj5jOxIaLB99tODQwOHDRHUeR4NeUd+w1ePRC7/jTi4BnI8bVlQjX/3DL1BeP30FzvNn2virQzTI+Xi4lKV/ORoaNo9e+9gAbwxsNixc+YfDv6P9/0mnvOuYYJ+pfpbd3w2Y2OX+s4KYVD0S7DPs8y3UXw/gfp6w6k+pJto/mmKLBeSXZp6Xyc8opTEx76eEjKCuLRcDyzxiZkc97e8bTTnSIqknwj5rnleods50tes/HCr5xNQztD9RV/XVLySfy2f9tUZypqpvBSau69mv5A6tN9FY9OdMU/S7yL5i8kY9+5lukZ3koj9n5Hm4LUL+VX31K5v2eX9LSt4hLZJ6EuSL3MybkAqk/Gv9h0OGzwzrlrE4p5RTfZ2XedLfEzFbdWlJaL2JBtervx7xqL/p9DvIWtu2UEGWdV7h6/2yi5BkTaJS7Jyo84hH/S2bcqRFck+AfdZlPiH2N/oPB+P1+gR9nAPPOk7wLgAAAABJRU5ErkJggg==" alt="img" loading="lazy"><span style="font-size:12pt">，输出如图结果：</span></div> <div style=""><span style="font-size:12pt">在计算矩阵的加法和乘法时，首先要考虑能不能运算。对于乘法要考虑矩阵乘法的特殊情况，比如一行乘以一列以及一列乘以一行等特殊情况，并对这些特殊情况进行测试。</span></div></td></tr><tr><td><div style=""><span style="font-size:12pt;font-family:Tahoma">三</span><span style="font-size:12pt;font-family:Tahoma">、实验</span><span style="font-size:12pt;font-family:Tahoma">软硬件环境</span></div> <div style="">Cmd命令框、java</div></td></tr><tr><td><div style=""><span style="font-size:12pt;font-family:Tahoma">四</span><span style="font-size:12pt;font-family:Tahoma">、</span><span style="font-size:12pt;font-family:Tahoma">实验过程（实验步骤、记录、数据、分析）</span></div> <div style="">1.代码思路：</div> <div style="">代码和注释：</div> <div style="">package test02;</div> <div style="">import java.util.*;</div> <div style="">import java.io.*;</div> <div style="">import java.util.Scanner; // 导入Scanner类，用于获取用户输入</div> <div style="">import java.util.regex.Matcher; // 导入Matcher类，用于正则表达式匹配</div> <div style="">import java.lang.StringBuffer; // 导入StringBuffer类，用于字符串操作</div> <div style="">public class Test2_1 {</div> <div style="">    public static void main(String [] args) throws IOException {</div> <div style="">        String str1, str2, str3, str4;</div> <div style="">        BufferedReader buf;</div> <div style="">        buf = new BufferedReader(new InputStreamReader(System.in)); // 初始化BufferedReader对象，从标准输入读取数据</div> <div style="">        System.out.print(&quot;请输入一行句子：&quot;);</div> <div style="">        String str = buf.readLine(); // 读取用户输入的一行文本</div> <div style="">        String[] strarry = new String[100];</div> <div style="">        // String str=&quot;WE will GO to 234 FLOOR at 17 pm&quot;;</div> <div style="">        String regex = &quot;[\\s]+&quot;; // 定义正则表达式，匹配一个或多个空白字符</div> <div style="">        String[] words = str.split(regex); // 使用正则表达式分割字符串，得到单词数组</div> <div style="">        // 遍历单词数组</div> <div style="">        for (int i = 0; i &lt; words.length; i++) {</div> <div style="">            int m = i + 1; // 当前单词序号</div> <div style="">            if (words[i].matches(&quot;[A-Z]+&quot;)) { // 如果单词全为大写字母</div> <div style="">                str1 = words[i].toLowerCase(); // 转换为小写</div> <div style="">                strarry[i] = str1; // 存储转换后的单词</div> <div style="">                System.out.println(&quot;单词&quot; + m + &quot;:&quot; + strarry[i]);</div> <div style="">            } else if (words[i].matches(&quot;[a-z]+&quot;)) { // 如果单词全为小写字母</div> <div style="">                str2 = words[i].toUpperCase(); // 转换为大写</div> <div style="">                strarry[i] = str2; // 存储转换后的单词</div> <div style="">                System.out.println(&quot;单词&quot; + m + &quot;:&quot; + strarry[i]);</div> <div style="">            } else { // 如果单词包含非字母字符</div> <div style="">                StringBuffer sb = new StringBuffer(words[i]);</div> <div style="">                str3 = sb.reverse().toString(); // 反转字符串</div> <div style="">                strarry[i] = str3; // 存储反转后的字符串</div> <div style="">                System.out.println(&quot;单词&quot; + m + &quot;:&quot; + strarry[i]);</div> <div style="">            }</div> <div style="">        }</div> <div style="">        System.out.print(&quot;反转后：&quot;);</div> <div style="">        // 反向遍历字符串数组并打印非空元素</div> <div style="">        for (int j = 0; j &lt; strarry.length; j++) {</div> <div style="">            if (strarry[99 - j] != null) { // 如果数组元素不为空</div> <div style="">                System.out.println(&quot; &quot; + strarry[99 - j] + &quot; &quot;);</div> <div style="">            }</div> <div style="">        }</div> <div style="">    }</div> <div style="">}</div> <div style="">2.代码思路：</div> <div style="">代码和注释：</div> <div style="">package test02;</div> <div style="">import java.util.*;</div> <div style="">import java.io.*;</div> <div style="">public class Test2_2 {</div> <div style="">    public static void main(String [] args) throws IOException {</div> <div style="">        Scanner reader = new Scanner(System.in);</div> <div style="">        int m, n, r, s;</div> <div style="">        System.out.print(&quot;请输入第一个矩阵的行数：&quot;);</div> <div style="">        m = reader.nextInt(); // 读取用户输入的第一个矩阵的行数</div> <div style="">        System.out.print(&quot;请输入第一个矩阵的列数：&quot;);</div> <div style="">        n = reader.nextInt(); // 读取用户输入的第一个矩阵的列数</div> <div style="">        int[][] Arry1;</div> <div style="">        Arry1 = new int[m][n]; // 初始化Arry1为m行n列的二维数组</div> <div style="">        matrixCreat(m, n, Arry1); // 调用matrixCreat方法填充Arry1</div> <div style="">        matrixPrint(m, n, Arry1); // 调用matrixPrint方法打印Arry1</div> <div style="">        System.out.print(&quot;请输入第二个矩阵的行数：&quot;);</div> <div style="">        r = reader.nextInt(); // 读取用户输入的第二个矩阵的行数</div> <div style="">        System.out.print(&quot;请输入第二个矩阵的列数：&quot;);</div> <div style="">        s = reader.nextInt(); // 读取用户输入的第二个矩阵的列数</div> <div style="">        int[][] Arry2;</div> <div style="">        Arry2 = new int[r][s]; // 初始化Arry2为r行s列的二维数组</div> <div style="">        matrixCreat(r, s, Arry2); // 调用matrixCreat方法填充Arry2</div> <div style="">        matrixPrint(r, s, Arry2); // 调用matrixPrint方法打印Arry2</div> <div style="">        if (m == r &amp;&amp; n == s) { // 如果两个矩阵的行数和列数都相等</div> <div style="">            int[][] Arry3;</div> <div style="">            Arry3 = new int[m][n]; // 初始化Arry3为m行n列的二维数组</div> <div style="">            matrixAdd(m, s, Arry1, Arry2, Arry3); // 调用matrixAdd方法将Arry1和Arry2相加，结果存储在Arry3中</div> <div style="">            System.out.println(&quot;两个矩阵的元素相加后为：&quot;);</div> <div style="">            for (int i = 0; i &lt; m; i++) { // 遍历Arry3的每一行</div> <div style="">                for (int j = 0; j &lt; n; j++) { // 遍历Arry3的每一列</div> <div style="">                    System.out.print(Arry3[i][j] + &quot;   &quot;); // 打印Arry3的元素</div> <div style="">                    if (j == n - 1) { // 如果当前是行的最后一个元素</div> <div style="">                        System.out.print(&quot;\n&quot;);</div> <div style="">                    }</div> <div style="">                }</div> <div style="">            }</div> <div style="">        }</div> <div style="">        if (n == r) { // 如果第一个矩阵的列数等于第二个矩阵的行数</div> <div style="">            int[][] Arry4;</div> <div style="">            Arry4 = new int[m][s]; // 初始化Arry4为m行s列的二维数组</div> <div style="">            matrixMultiply(m, s, r, Arry1, Arry2, Arry4); // 调用matrixMultiply方法将Arry1和Arry2相乘，结果存储在Arry4中</div> <div style="">            System.out.println(&quot;两个矩阵的元素相乘后为：&quot;);</div> <div style="">            for (int i = 0; i &lt; m; i++) { // 遍历Arry4的每一行</div> <div style="">                for (int j = 0; j &lt; s; j++) { // 遍历Arry4的每一列</div> <div style="">                    System.out.print(Arry4[i][j] + &quot;   &quot;); // 打印Arry4的元素</div> <div style="">                    if (j == s - 1) { // 如果当前是行的最后一个元素</div> <div style="">                        System.out.print(&quot;\n&quot;);</div> <div style="">                    }</div> <div style="">                }</div> <div style="">            }</div> <div style="">        }</div> <div style="">        if (n != r) { // 如果第一个矩阵的列数不等于第二个矩阵的行数</div> <div style="">            System.out.print(&quot;这两个矩阵既不能相加也不能相乘!&quot;);</div> <div style="">        }</div> <div style="">    }</div> <div style="">    // 创建并填充矩阵的方法</div> <div style="">    public static int matrixCreat(int x, int y, int[][] Arry) {</div> <div style="">        Scanner reader = new Scanner(System.in);</div> <div style="">        System.out.println(&quot;请输入&quot; + x + &quot;*&quot; + y + &quot;矩阵的元素：&quot;);</div> <div style="">        for (int i = 0; i &lt; x; i++) { // 遍历每一行</div> <div style="">            for (int j = 0; j &lt; y; j++) { // 遍历每一列</div> <div style="">                Arry[i][j] = reader.nextInt(); // 读取用户输入的元素并赋值给Arry</div> <div style="">            }</div> <div style="">        }</div> <div style="">        return 0;</div> <div style="">    }</div> <div style="">    // 打印矩阵的方法</div> <div style="">    public static int matrixPrint(int x, int y, int[][] Arry) {</div> <div style="">        System.out.println(x + &quot;*&quot; + y + &quot;矩阵的元素为：&quot;);</div> <div style="">        for (int i = 0; i &lt; x; i++) { // 遍历每一行</div> <div style="">            for (int j = 0; j &lt; y; j++) { // 遍历每一列</div> <div style="">                System.out.print(Arry[i][j] + &quot; &quot;); // 打印矩阵的元素</div> <div style="">                if (j == y - 1) { // 如果当前是行的最后一个元素</div> <div style="">                    System.out.print(&quot;\n&quot;);</div> <div style="">                }</div> <div style="">            }</div> <div style="">        }</div> <div style="">        return 0;</div> <div style="">    }</div> <div style="">    // 矩阵相加的方法</div> <div style="">    public static int matrixAdd(int x, int y, int[][] A, int[][] B, int[][] C) {</div> <div style="">        for (int i = 0; i &lt; x; i++) { // 遍历每一行</div> <div style="">            for (int j = 0; j &lt; y; j++) { // 遍历每一列</div> <div style="">                C[i][j] = A[i][j] + B[i][j]; // 对应位置元素相加并赋值给C</div> <div style="">            }</div> <div style="">        }</div> <div style="">        return 0;</div> <div style="">    }</div> <div style="">    // 矩阵相乘的方法</div> <div style="">    public static int matrixMultiply(int x, int y, int z, int[][] A, int[][] B, int[][] C) {</div> <div style="">        int a = 0;</div> <div style="">        while (a &lt; x) { // 遍历A的每一行</div> <div style="">            int b = 0;</div> <div style="">            while (b &lt; y) { // 遍历B的每一列</div> <div style="">                int k = 0;</div> <div style="">                for (int j = 0; j &lt; z; j++) { // 遍历A的每一列和B的每一行</div> <div style="">                    k += A[a][j] * B[j][b]; // 计算对应位置元素的乘积并累加到k</div> <div style="">                }</div> <div style="">                C[a][b] = k; // 将k赋值给C的对应位置</div> <div style="">                b++;</div> <div style="">            }</div> <div style="">            a++;</div> <div style="">        }</div> <div style="">        return 0;</div> <div style="">    }</div> <div style="">}</div></td></tr><tr><td></td></tr><tr><td><div style=""><span style="font-size:12pt;font-family:Tahoma">五</span><span style="font-size:12pt;font-family:Tahoma">、</span><span style="font-size:12pt;font-family:Tahoma">测试</span><span style="font-size:12pt;font-family:Tahoma">/</span><span style="font-size:12pt;font-family:Tahoma">调试及</span><span style="font-size:12pt;font-family:Tahoma">实验</span><span style="font-size:12pt;font-family:Tahoma">结果分析</span></div></td></tr><tr><td><div style=""><span style="font-size:12pt;font-family:Tahoma">六</span><span style="font-size:12pt;font-family:Tahoma">、实验</span><span style="font-size:12pt;font-family:Tahoma">结论与体会</span></div> <div style=""><span style="font-family:宋体;SimSun">年    月    日</span></div></td></tr></table></div></div>
+</article>
+</main>
+<footer class="footer">
+  <p>&copy; 2026 Alan's Blog. Powered by curiosity.</p>
+</footer>
+<div class="back-to-top" id="backToTop">▲</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-php.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+<script>
+// 一键复制代码
+function copyCode(btn) {{
+  var block = btn.closest('.code-block') || btn.closest('.inline-code-block');
+  var code = block.querySelector('code').innerText;
+  navigator.clipboard.writeText(code).then(function() {{
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(function() {{ btn.textContent = 'Copy'; btn.classList.remove('copied'); }}, 2000);
+  }}).catch(function() {{
+    // fallback
+    var ta = document.createElement('textarea');
+    ta.value = code;
+    ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(function() {{ btn.textContent = 'Copy'; btn.classList.remove('copied'); }}, 2000);
+  }});
+}}
+
+// 自动包装连续的代码段落为整体代码块并添加复制按钮
+document.addEventListener('DOMContentLoaded', function() {{
+  var all = document.querySelectorAll('.article-body > p[data-code="true"]');
+  if (!all.length) return;
+  // 分组连续段落
+  var groups = [];
+  var cur = [];
+  all.forEach(function(p) {{
+    if (cur.length === 0 || p.previousElementSibling === cur[cur.length - 1]) {{
+      cur.push(p);
+    }} else {{
+      groups.push(cur);
+      cur = [p];
+    }}
+  }});
+  if (cur.length) groups.push(cur);
+  // 每组包装为一个代码块
+  groups.forEach(function(grp) {{
+    var codes = grp.map(function(p) {{ return p.innerHTML.trim(); }}).join('
+');
+    if (!codes) return;
+    var wrapper = document.createElement('div');
+    wrapper.className = 'inline-code-block';
+    wrapper.innerHTML = '<div class="code-header"><span class="code-lang">Code</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div><pre><code>' + codes + '</code></pre></div>';
+    grp[0].parentNode.insertBefore(wrapper, grp[0]);
+    grp.forEach(function(p) {{ p.parentNode.removeChild(p); }});
+  }});
+  if (typeof Prism !== 'undefined') {{
+    Prism.highlightAll();
+  }}
+}});
+</script>
+<script src="../js/interactions.js"></script>
+<script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</body>
+</html>
