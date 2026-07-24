@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' cdnjs.cloudflare.com busuanzi.ibruce.info; style-src 'self' 'unsafe-inline' fonts.googleapis.com cdnjs.cloudflare.com; font-src 'self' fonts.gstatic.com; img-src 'self' data: https:; frame-ancestors 'none'; connect-src 'self' busuanzi.ibruce.info;">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://busuanzi.ibruce.info">
+<title>Alan's Blog</title>
+<link rel="stylesheet" href="css/style.css">
+<script>
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  const prismTheme = document.getElementById('prism-theme');
+  if (theme === 'dark') {
+    prismTheme.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css';
+  } else {
+    prismTheme.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css';
+  }
+  localStorage.setItem('blog-theme', theme);
+}
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') || 'light';
+  const next = current === 'light' ? 'dark' : 'light';
+  applyTheme(next);
+}
+document.addEventListener('DOMContentLoaded', function() {
+  const saved = localStorage.getItem('blog-theme');
+  if (saved) { applyTheme(saved); } else { applyTheme('dark'); }
+});
+</script>
+<link rel="stylesheet" id="prism-theme" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+</head>
+<body>
+<div class="container">
+<header class="header">
+  <div class="logo"><span class="terminal-icon">></span> Alan's <span class="accent">Blog</span></div>
+  <nav><a href="index.html">HOME</a><a href="#courses">COURSES</a><a href="about.html">ABOUT</a><button class="theme-toggle" onclick="toggleTheme()" title="切换主题">&#9788;</button></nav>
+</header>
+<div class="layout">
+    <main class="main-content">
+<section id="home" class="hero">
+  <div class="hero-content">
+    <h1 class="hero-title reveal">Welcome to the <span class="accent">Terminal</span></h1>
+    <div class="terminal reveal">
+      <div class="terminal-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="terminal-title">alan@blog:~$</span></div>
+      <div class="terminal-body">
+        <p><span class="prompt">$</span> whoami</p>
+        <p class="output">> Alan - Cybersecurity Student</p>
+        <p><span class="prompt">$</span> cat skills.txt</p>
+        <p class="output">> Python | PHP | C/C++ | Web Security | Network Analysis | Info Hiding</p>
+        <p><span class="prompt">$</span> ls -la /courses/</p>
+        <p class="output">> total 22 courses, 121 articles</p>
+        <p><span class="prompt">$</span> <span class="cursor">_</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="courses" class="courses-section">
+  <h2 class="section-title reveal">// COURSES</h2>
+  <div class="card-grid"><div class="card-page active" data-page="0"><a href="categories/大三下实训.html" class="course-card reveal">
+  <div class="course-card-body">
+    <div class="course-card-top">
+      <span class="course-count">25 篇</span>
+      <span class="course-diff" style="background:#00ccff">进阶</span>
+    </div>
+    <h3 class="course-name">大三下实训</h3>
+    <p class="course-summary">SQL注入、XSS跨站脚本、Token爆破、Burp Suite等Web安全渗透测试实训</p>
+    <div class="course-card-footer">
+      <span class="course-time">&#9201; 共 63 min</span>
+      <span class="course-arrow">&#8594;</span>
+    </div>
+  </div>
+</a><a href="categories/计算机网络.html" class="course-card reveal">
+  <div class="course-card-body">
+    <div class="course-card-top">
+      <span class="course-count">8 篇</span>
+      <span class="course-diff" style="background:#00ccff">进阶</span>
+    </div>
+    <h3 class="course-name">计算机网络</h3>
+    <p class="course-summary">GNS3网络拓扑搭建、VLAN划分、路由协议配置、网络实验全记录</p>
+    <div class="course-card-footer">
+      <span class="course-time">&#9201; 共 41 min</span>
+      <span class="course-arrow">&#8594;</span>
+    </div>
+  </div>
+</a><a href="categories/Linux实验.html" class="course-card reveal">
+  <div class="course-card-body">
+    <div class="course-card-top">
+      <span class="course-count">8 篇</span>
+      <span class="course-diff" style="background:#00ccff">进阶</span>
+    </div>
+    <h3 class="course-name">Linux实验</h3>
+    <p class="course-summary">Linux系统管理、Shell编程、用户权限、进程管理、网络配置等基础实验</p>
+    <div class="course-card-footer">
+      <span class="course-time">&#9201; 共 37 min</span>
+      <span class="course-arrow">&#8594;</span>
+    </div>
+  </div>
+</a><a href="categories/信息隐藏技术.html" class="course-card reveal">
+  <div class="course-card-body">
+    <div class="course-card-top">
+      <span class="course-count">7 篇</span>
+      <span class="course-diff" style="background:#0055aa">专家</span>
+    </div>
+    <h3 class="course-name">信息隐藏技术</h3>
+    <p class="course-summary">LSB隐写、DCT变换、数字水印、图像信息隐藏与提取等核心技术实验</p>
+    <div class="course-card-footer">
+      <span class="course-time">&#9201; 共 75 min</span>
+      <span class="course-arrow">&#8594;</span>
+    </div>
+  </div>
+</a><a href="categories/Python编程.html" class="course-card reveal">
+  <div class="course-card-body">
+    <div class="course-card-top">
+      <span class="course-count">5 篇</span>
+      <span class="course-diff" style="background:#00cc88">基础</span>
+    </div>
+    <h3 class="course-name">Python编程</h3>
+    <p class="course-summary">Socket网络编程、端口扫描、正则表达式、网络爬虫、多线程聊天系统</p>
+    <div class="course-card-footer">
+      <span class="course-time">&#9201; 共 15 min</span>
+      <span class="course-arrow">&#8594;</span>
+    </div>
+  </div>
+</a><a href="categories/大三上实训.html" class="course-card reveal">
+  <div class="course-card-body">
+    <div class="course-card-top">
+      <span class="course-count">5 篇</span>
+      <span class="course-diff" style="background:#00ccff">进阶</span>
+    </div>
+    <h3 class="course-name">大三上实训</h3>
+    <p class="course-summary">防火墙配置、文件包含漏洞、暴力破解、SQL注入等网络安全实训</p>
+    <div class="course-card-footer">
+      <span class="course-time">&#9201; 共 11 min</span>
+      <span class="course-arrow">&#8594;</span>
+    </div>
+  </div>
+</a></div><div class="card-page " data-page="1"><a href="categories/Web前端开发.html" class="course-card reveal">
+  <div class="course-card-body">
+    <div class="course-card-top">
+      <span class="course-count">8 篇</span>
+      <span class="course-diff" style="background:#00cc88">基础</span>
+    </div>
+    <h3 class="course-name">Web前端开发</h3>
+    <p class="course-summary">HTML/CSS/JavaScript实验报告，涵盖DOM操作、事件处理、响应式布局等前端开发技术</p>
+    <div class="course-card-footer">
+      <span class="course-time">&#9201; 共 9 min</span>
+      <span class="course-arrow">&#8594;</span>
+    </div>
+  </div>
+</a><a href="categories/数据结构.html" class="course-card reveal">
+  <div class="course-card-body">
+    <div class="course-card-top">
+      <span class="course-count">5 篇</span>
+      <span class="course-diff" style="background:#00cc88">基础</span>
+    </div>
+    <h3 class="course-name">数据结构</h3>
+    <p class="course-summary">栈、队列、链表、约瑟夫问题等数据结构核心实验，含小组项目作业</p>
+    <div class="course-card-footer">
+      <span class="course-time">&#9201; 共 19 min</span>
+      <span class="course-arrow">&#8594;</span>
+    </div>
+  </div>
+</a><a href="categories/ACM算法.html" class="course-card reveal">
+  <div class="course-card-body">
+    <div class="course-card-top">
+      <span class="course-count">3 篇</span>
+      <span class="course-diff" style="background:#00cc88">基础</span>
+    </div>
+    <h3 class="course-name">ACM算法</h3>
+    <p class="course-summary">ACM竞赛解题报告，涵盖算法设计与分析、数据结构综合应用</p>
+    <div class="course-card-footer">
+      <span class="course-time">&#9201; 共 25 min</span>
+      <span class="course-arrow">&#8594;</span>
+    </div>
+  </div>
+</a><a href="categories/src漏洞提交.html" class="course-card reveal">
+  <div class="course-card-body">
+    <div class="course-card-top">
+      <span class="course-count">4 篇</span>
+      <span class="course-diff" style="background:#00cc88">基础</span>
+    </div>
+    <h3 class="course-name">src漏洞提交</h3>
+    <p class="course-summary">补天SRC平台漏洞提交报告，涵盖文件上传、CSRF、弱口令等Web安全漏洞</p>
+    <div class="course-card-footer">
+      <span class="course-time">&#9201; 共 12 min</span>
+      <span class="course-arrow">&#8594;</span>
+    </div>
+  </div>
+</a><a href="categories/日志审计与分析.html" class="course-card reveal">
+  <div class="course-card-body">
+    <div class="course-card-top">
+      <span class="course-count">5 篇</span>
+      <span class="course-diff" style="background:#007acc">高级</span>
+    </div>
+    <h3 class="course-name">日志审计与分析</h3>
+    <p class="course-summary">Linux系统日志、Windows事件日志、Web日志的审计分析实战</p>
+    <div class="course-card-footer">
+      <span class="course-time">&#9201; 共 53 min</span>
+      <span class="course-arrow">&#8594;</span>
+    </div>
+  </div>
+</a><a href="categories/数据科学.html" class="course-card reveal">
+  <div class="course-card-body">
+    <div class="course-card-top">
+      <span class="course-count">2 篇</span>
+      <span class="course-diff" style="background:#00cc88">基础</span>
+    </div>
+    <h3 class="course-name">数据科学</h3>
+    <p class="course-summary">数据建模、数学建模方法与实践</p>
+    <div class="course-card-footer">
+      <span class="course-time">&#9201; 共 16 min</span>
+      <span class="course-arrow">&#8594;</span>
+    </div>
+  </div>
+</a></div><div class="card-page " data-page="2"><a href="categories/漏洞扫描与防护.html" class="course-card reveal">
+  <div class="course-card-body">
+    <div class="course-card-top">
+      <span class="course-count">6 篇</span>
+      <span class="course-diff" style="background:#0055aa">专家</span>
+    </div>
+    <h3 class="course-name">漏洞扫描与防护</h3>
+    <p class="course-summary">Nessus漏洞扫描、DC-1渗透测试、Metasploit漏洞利用与安全防护</p>
+    <div class="course-card-footer">
+      <span class="course-time">&#9201; 共 66 min</span>
+      <span class="course-arrow">&#8594;</span>
+    </div>
+  </div>
+</a><a href="categories/入侵检测与防御.html" class="course-card reveal">
+  <div class="course-card-body">
+    <div class="course-card-top">
+      <span class="course-count">1 篇</span>
+      <span class="course-diff" style="background:#0055aa">专家</span>
+    </div>
+    <h3 class="course-name">入侵检测与防御</h3>
+    <p class="course-summary">Snort入侵检测系统配置、规则编写与攻击防御实验</p>
+    <div class="course-card-footer">
+      <span class="course-time">&#9201; 共 27 min</span>
+      <span class="course-arrow">&#8594;</span>
+    </div>
+  </div>
+</a><a href="categories/软件工程.html" class="course-card reveal">
+  <div class="course-card-body">
+    <div class="course-card-top">
+      <span class="course-count">2 篇</span>
+      <span class="course-diff" style="background:#00ccff">进阶</span>
+    </div>
+    <h3 class="course-name">软件工程</h3>
+    <p class="course-summary">ATM系统需求分析、系统设计、UML建模、软件测试等完整开发流程</p>
+    <div class="course-card-footer">
+      <span class="course-time">&#9201; 共 41 min</span>
+      <span class="course-arrow">&#8594;</span>
+    </div>
+  </div>
+</a><a href="categories/路由交换技术.html" class="course-card reveal">
+  <div class="course-card-body">
+    <div class="course-card-top">
+      <span class="course-count">5 篇</span>
+      <span class="course-diff" style="background:#007acc">高级</span>
+    </div>
+    <h3 class="course-name">路由交换技术</h3>
+    <p class="course-summary">Cisco设备调试、VLAN配置、静态/动态路由、STP协议等网络设备实验</p>
+    <div class="course-card-footer">
+      <span class="course-time">&#9201; 共 21 min</span>
+      <span class="course-arrow">&#8594;</span>
+    </div>
+  </div>
+</a><a href="categories/网络协议分析.html" class="course-card reveal">
+  <div class="course-card-body">
+    <div class="course-card-top">
+      <span class="course-count">4 篇</span>
+      <span class="course-diff" style="background:#007acc">高级</span>
+    </div>
+    <h3 class="course-name">网络协议分析</h3>
+    <p class="course-summary">Wireshark抓包分析、ICMP/DHCP/NAT/ARP/VLAN协议深度解析</p>
+    <div class="course-card-footer">
+      <span class="course-time">&#9201; 共 26 min</span>
+      <span class="course-arrow">&#8594;</span>
+    </div>
+  </div>
+</a><a href="categories/大二下实训.html" class="course-card reveal">
+  <div class="course-card-body">
+    <div class="course-card-top">
+      <span class="course-count">2 篇</span>
+      <span class="course-diff" style="background:#00cc88">基础</span>
+    </div>
+    <h3 class="course-name">大二下实训</h3>
+    <p class="course-summary">MySQL数据库操作、单表/多表查询、SQL练习与考试</p>
+    <div class="course-card-footer">
+      <span class="course-time">&#9201; 共 2 min</span>
+      <span class="course-arrow">&#8594;</span>
+    </div>
+  </div>
+</a></div><div class="card-page " data-page="3"><a href="categories/操作系统.html" class="course-card reveal">
+  <div class="course-card-body">
+    <div class="course-card-top">
+      <span class="course-count">4 篇</span>
+      <span class="course-diff" style="background:#00ccff">进阶</span>
+    </div>
+    <h3 class="course-name">操作系统</h3>
+    <p class="course-summary">进程调度、内存管理、文件系统、死锁检测等操作系统核心实验</p>
+    <div class="course-card-footer">
+      <span class="course-time">&#9201; 共 8 min</span>
+      <span class="course-arrow">&#8594;</span>
+    </div>
+  </div>
+</a><a href="categories/Java编程.html" class="course-card reveal">
+  <div class="course-card-body">
+    <div class="course-card-top">
+      <span class="course-count">4 篇</span>
+      <span class="course-diff" style="background:#00ff41">入门</span>
+    </div>
+    <h3 class="course-name">Java编程</h3>
+    <p class="course-summary">Java面向对象程序设计实验，涵盖继承、多态、接口、异常处理等核心概念</p>
+    <div class="course-card-footer">
+      <span class="course-time">&#9201; 共 19 min</span>
+      <span class="course-arrow">&#8594;</span>
+    </div>
+  </div>
+</a><a href="categories/大一下实训.html" class="course-card reveal">
+  <div class="course-card-body">
+    <div class="course-card-top">
+      <span class="course-count">1 篇</span>
+      <span class="course-diff" style="background:#00cc88">基础</span>
+    </div>
+    <h3 class="course-name">大一下实训</h3>
+    <p class="course-summary">图书信息管理系统需求分析，软件工程文档编写实践</p>
+    <div class="course-card-footer">
+      <span class="course-time">&#9201; 共 5 min</span>
+      <span class="course-arrow">&#8594;</span>
+    </div>
+  </div>
+</a><a href="categories/C语言.html" class="course-card reveal">
+  <div class="course-card-body">
+    <div class="course-card-top">
+      <span class="course-count">7 篇</span>
+      <span class="course-diff" style="background:#00cc88">基础</span>
+    </div>
+    <h3 class="course-name">C语言</h3>
+    <p class="course-summary">C语言程序设计实验报告，涵盖数组、函数、指针、链表等核心编程实验</p>
+    <div class="course-card-footer">
+      <span class="course-time">&#9201; 共 9 min</span>
+      <span class="course-arrow">&#8594;</span>
+    </div>
+  </div>
+</a></div></div>
+  <div class="pagination"><button class="page-btn page-arrow page-prev disabled" data-dir="prev" title="上一页">&laquo;</button><button class="page-btn active" data-page="0">1</button><button class="page-btn " data-page="1">2</button><button class="page-btn " data-page="2">3</button><button class="page-btn " data-page="3">4</button><button class="page-btn page-arrow page-next" data-dir="next" title="下一页">&raquo;</button></div>
+</section>
+</main>
+<aside class="sidebar">
+  <div class="sidebar-card">
+    <h3>&#128227; 公告</h3>
+    <p class="sidebar-notice">欢迎访问我的技术博客！所有文章仅供阅读学习，不得进行真实非法攻击，如有违规，请自行承担法律责任和后果。</p>
+  </div>
+  <a href="https://github.com/alanishere-hacker" target="_blank" rel="noopener noreferrer" class="sidebar-card sidebar-github-card">
+    <div class="sidebar-github-icon">&#128187;</div>
+    <p class="sidebar-github-text">快来访问我的 GitHub 吧！</p>
+    <span class="sidebar-github-arrow">&#8594;</span>
+  </a>
+  <a href="https://blog.csdn.net/2301_81703168?type=blog" target="_blank" rel="noopener noreferrer" class="sidebar-card sidebar-github-card">
+    <div class="sidebar-github-icon">&#9997;</div>
+    <p class="sidebar-github-text">快来访问我的 CSDN 博客吧！</p>
+    <span class="sidebar-github-arrow">&#8594;</span>
+  </a>
+  <div class="sidebar-card">
+    <h3>&#128218; 站点信息</h3>
+    <div class="sidebar-stat">
+      <span class="sidebar-stat-label">文章总数</span>
+      <span class="sidebar-stat-value">121</span>
+    </div>
+    <div class="sidebar-stat">
+      <span class="sidebar-stat-label">建站天数</span>
+      <span class="sidebar-stat-value" id="days-since">--</span>
+    </div>
+  </div>
+  <div class="sidebar-card">
+    <h3>&#128200; 访问统计</h3>
+    <div class="sidebar-stat" id="busuanzi_container_site_pv">
+      <span class="sidebar-stat-label">总访问量</span>
+      <span class="sidebar-stat-value" id="busuanzi_value_site_pv"></span>
+    </div>
+    <div class="sidebar-stat" id="busuanzi_container_site_uv">
+      <span class="sidebar-stat-label">访客数</span>
+      <span class="sidebar-stat-value" id="busuanzi_value_site_uv"></span>
+    </div>
+  </div>
+  <div class="sidebar-card">
+    <h3>&#128337; 最近更新</h3>
+    <ul class="sidebar-recent-list">
+<li class="sidebar-recent-item">
+        <a href="articles/大三下实训_71.html" class="sidebar-recent-link">DC-1靶场实战：Drupalgeddon2漏洞利用与提权通关</a>
+        <span class="sidebar-recent-date">2026-07-23</span>
+      </li>
+<li class="sidebar-recent-item">
+        <a href="articles/大三下实训_68.html" class="sidebar-recent-link">微信小程序抓包配置：Proxifier代理与积分漏洞测试</a>
+        <span class="sidebar-recent-date">2026-07-22</span>
+      </li>
+<li class="sidebar-recent-item">
+        <a href="articles/大三下实训_69.html" class="sidebar-recent-link">内网信息收集：Windows主机与域环境侦察技术</a>
+        <span class="sidebar-recent-date">2026-07-22</span>
+      </li>
+<li class="sidebar-recent-item">
+        <a href="articles/大三下实训_70.html" class="sidebar-recent-link">Windows域搭建与NTLM哈希传递攻击实战</a>
+        <span class="sidebar-recent-date">2026-07-22</span>
+      </li>
+<li class="sidebar-recent-item">
+        <a href="articles/计算机网络_12.html" class="sidebar-recent-link">单交换机Port VLAN配置与实现</a>
+        <span class="sidebar-recent-date">2026-07-20</span>
+      </li>
+    </ul>
+  </div>
+</aside>
+</div>
+<footer class="footer">
+  <p>&copy; 2026 Alan's Blog. Powered by curiosity.</p>
+</footer>
+<div class="back-to-top" id="backToTop">▲</div>
+</div>
+<script src="js/interactions.js"></script>
+<script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+(function() {
+  // 课程卡片分页
+  var cardPages = document.querySelectorAll('.card-page');
+  var numBtns = document.querySelectorAll('.page-btn[data-page]');
+  var prevBtn = document.querySelector('.page-prev');
+  var nextBtn = document.querySelector('.page-next');
+  var totalPages = cardPages.length;
+  var currentPage = 0;
+
+  function goToPage(page) {
+    if (page < 0 || page >= totalPages) return;
+    currentPage = page;
+    cardPages.forEach(function(cp) { cp.classList.remove('active'); });
+    numBtns.forEach(function(pb) { pb.classList.remove('active'); });
+    document.querySelector('.card-page[data-page="' + page + '"]').classList.add('active');
+    document.querySelector('.page-btn[data-page="' + page + '"]').classList.add('active');
+    // 更新箭头状态
+    if (prevBtn) prevBtn.classList.toggle('disabled', page === 0);
+    if (nextBtn) nextBtn.classList.toggle('disabled', page === totalPages - 1);
+    document.getElementById('courses').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  if (numBtns.length > 0) {
+    numBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        goToPage(parseInt(this.getAttribute('data-page')));
+      });
+    });
+    if (prevBtn) prevBtn.addEventListener('click', function() { goToPage(currentPage - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', function() { goToPage(currentPage + 1); });
+  }
+  // 建站天数
+  var start = new Date('2026-07-16');
+  var now = new Date();
+  var days = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+  document.getElementById('days-since').textContent = days;
+})();
+</script>
+</body>
+</html>

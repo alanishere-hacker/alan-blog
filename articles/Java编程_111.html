@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' cdnjs.cloudflare.com busuanzi.ibruce.info; style-src 'self' 'unsafe-inline' fonts.googleapis.com cdnjs.cloudflare.com; font-src 'self' fonts.gstatic.com; img-src 'self' data: https:; frame-ancestors 'none'; connect-src 'self' busuanzi.ibruce.info;">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://busuanzi.ibruce.info">
+<title>Java基础语法入门：循环结构与递归算法实践 - Alan's Blog</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" id="prism-theme" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+<script>
+// Theme toggle - light/dark
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  const prismTheme = document.getElementById('prism-theme');
+  if (theme === 'dark') {
+    prismTheme.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css';
+  } else {
+    prismTheme.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css';
+  }
+  localStorage.setItem('blog-theme', theme);
+}
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') || 'light';
+  const next = current === 'light' ? 'dark' : 'light';
+  applyTheme(next);
+}
+// Initialize from localStorage
+document.addEventListener('DOMContentLoaded', function() {
+  const saved = localStorage.getItem('blog-theme');
+  if (saved) {
+    applyTheme(saved);
+  } else {
+    applyTheme('dark');
+  }
+});
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+</head>
+<body>
+<div class="container">
+<header class="header">
+  <a href="../index.html" class="logo"><span class="terminal-icon">></span> Alan's <span class="accent">Blog</span></a>
+  <nav><a href="../index.html">HOME</a><a href="../index.html#articles">ARTICLES</a><a href="../about.html">ABOUT</a><button class="theme-toggle" onclick="toggleTheme()" title="切换主题">&#9788;</button></nav>
+</header>
+<main>
+<article class="article-full">
+  <div class="article-meta reveal">
+    <span class="category-tag">Java编程</span>
+    <span class="meta-item"><span class="meta-icon">&#128197;</span> 2024-10-15</span>
+    <span class="meta-item"><span class="meta-icon">&#9201;</span> 4 min read</span>
+    <span class="meta-item"><span class="meta-icon">&#9889;</span> <span class="diff-badge" style="background:#00ff41">入门</span></span>
+    <span class="meta-item"><span class="meta-icon">&#128214;</span> <span id="busuanzi_container_page_pv" class="page-reads">阅读 <span id="busuanzi_value_page_pv"></span></span></span>
+  </div>
+  <h1 class="article-title reveal">Java基础语法入门：循环结构与递归算法实践</h1>
+  <div class="article-body"><div class="table-wrapper"><table><tr><td><div style=""><span style="font-size:12pt;font-family:Tahoma">一、实验目的</span><span style="font-size:12pt;font-family:Tahoma">及要求</span></div> <div style=""><span style="font-size:12pt">1</span><span style="font-size:12pt">、掌握从键盘输入不同类型数据的方法。</span></div> <div style=""><span style="font-size:12pt">2</span><span style="font-size:12pt">、掌握</span><span style="font-size:12pt">Java</span><span style="font-size:12pt">语言循环语句的基本格式与编程实现。</span></div> <div style=""><span style="font-size:12pt">3</span><span style="font-size:12pt">、认识递归基本原理并用其解决问题。</span></div></td></tr><tr><td><div style=""><span style="font-size:12pt;font-family:Tahoma">二</span><span style="font-size:12pt;font-family:Tahoma">、</span><span style="font-size:12pt;font-family:Tahoma">实验原理与内容</span></div> <div style=""><span style="font-size:12pt;color:#0000FF">1</span><span style="font-size:12pt;color:#0000FF">、从键盘输入一个整数，设计一个程序判断该整数是否是完全数。完全数是指其所有因素（包括</span><span style="font-size:12pt;color:#0000FF">1</span><span style="font-size:12pt;color:#0000FF">但不包括其自身）的和等于该数自身的数。例如</span><span style="font-size:12pt;color:#0000FF">28=1+2+4+7+14</span><span style="font-size:12pt;color:#0000FF">就是一个完全数。</span></div> <div style=""><span style="font-size:12pt">2</span><span style="font-size:12pt">、水仙花数是指个位、十位和百位三个数的立方和等于这个三位数本身的数（提示：水仙花数涉及个位、十位、百位数字，所以水仙花数是一个三位数）。例如</span><span style="font-size:12pt">153=1</span><span style="font-size:12pt">3</span><span style="font-size:12pt">+5</span><span style="font-size:12pt">3</span><span style="font-size:12pt">+3</span><span style="font-size:12pt">3</span><span style="font-size:12pt">。</span><span style="font-size:12pt">水仙花数只是</span><span style="font-size:12pt">的一种</span><span style="font-size:12pt">。</span><span style="font-size:12pt">如果在一个固定的</span><span style="font-size:12pt">中，一个</span><span style="font-size:12pt">n</span><span style="font-size:12pt">位</span><span style="font-size:12pt">等于自身各个数位上数字的</span><span style="font-size:12pt">n</span><span style="font-size:12pt">次幂之和，则称此数为自幂数。</span></div> <div style=""><span style="font-size:12pt">附：</span><span style="font-size:12pt">十进制中十位以内自然</span><span style="font-size:12pt">数的自幂数名字</span><span style="font-size:12pt">：</span></div> <div style=""><span style="font-size:12pt">一位自幂数：独身数</span></div> <div style=""><span style="font-size:12pt">两位自幂数：</span><span style="font-size:12pt">不存在</span></div> <div style=""><span style="font-size:12pt">三位自幂数：水仙花数</span></div> <div style=""><span style="font-size:12pt">四位自幂数：四叶玫瑰数</span><span style="font-size:12pt">，如</span><span style="font-size:12pt">1634=1</span><span style="font-size:12pt">4</span><span style="font-size:12pt">+6</span><span style="font-size:12pt">4</span><span style="font-size:12pt">+3</span><span style="font-size:12pt">4</span><span style="font-size:12pt">+4</span><span style="font-size:12pt">4</span></div> <div style=""><span style="font-size:12pt">五位自幂数：五角星数</span></div> <div style=""><span style="font-size:12pt">六位自幂数：六合数</span></div> <div style=""><span style="font-size:12pt">七位自幂数：北斗七星数</span></div> <div style=""><span style="font-size:12pt">八位自幂数：八仙数</span></div> <div style=""><span style="font-size:12pt">九位自幂数：九九重阳数</span><span style="font-size:12pt">，如</span><span style="font-size:12pt">146511208=1</span><span style="font-size:12pt">9</span><span style="font-size:12pt">+4</span><span style="font-size:12pt">9</span><span style="font-size:12pt">+6</span><span style="font-size:12pt">9</span><span style="font-size:12pt">+5</span><span style="font-size:12pt">9</span><span style="font-size:12pt">+1</span><span style="font-size:12pt">9</span><span style="font-size:12pt">+1</span><span style="font-size:12pt">9</span><span style="font-size:12pt">+2</span><span style="font-size:12pt">9</span><span style="font-size:12pt">+0</span><span style="font-size:12pt">9</span><span style="font-size:12pt">+8</span><span style="font-size:12pt">9</span></div> <div style=""><span style="font-size:12pt">十位自幂数：十全十美数</span></div> <div style=""><span style="font-size:12pt"><strong>请编程实现输出以上所有的自幂数。</strong></span></div> <div style=""><span style="font-size:12pt">设计一个递归方法</span><span style="font-size:12pt">int binarySearch(int a [],int first, int last, int target)</span><span style="font-size:12pt">，用于查找给定的数值</span><span style="font-size:12pt">target</span><span style="font-size:12pt">是否在已排序的数组</span><span style="font-size:12pt">a</span><span style="font-size:12pt">中，其中</span><span style="font-size:12pt">first</span><span style="font-size:12pt">是数组</span><span style="font-size:12pt">a</span><span style="font-size:12pt">的第一个元素，</span><span style="font-size:12pt">last</span><span style="font-size:12pt">是数组</span><span style="font-size:12pt">a</span><span style="font-size:12pt">的最后一个元素，方法返回</span><span style="font-size:12pt">target</span><span style="font-size:12pt">在</span><span style="font-size:12pt">a</span><span style="font-size:12pt">中的位置，如果</span><span style="font-size:12pt">target</span><span style="font-size:12pt">不在</span><span style="font-size:12pt">a</span><span style="font-size:12pt">中，则返回</span><span style="font-size:12pt">-</span><span style="font-size:12pt">（</span><span style="font-size:12pt">insert_point+1</span><span style="font-size:12pt">），其中</span><span style="font-size:12pt">insert_point</span><span style="font-size:12pt">是要将</span><span style="font-size:12pt">target</span><span style="font-size:12pt">插入到</span><span style="font-size:12pt">a</span><span style="font-size:12pt">中的位置。示例输出：</span></div> <div style=""><span style="font-size:12pt">数组</span><span style="font-size:12pt">a</span><span style="font-size:12pt">：</span><span style="font-size:12pt">[1, 3, 4, 8, 13, 20, 26, 88, 120]</span></div> <div style=""><span style="font-size:12pt">20</span><span style="font-size:12pt">在</span><span style="font-size:12pt">a</span><span style="font-size:12pt">中的位置：</span><span style="font-size:12pt">5</span></div> <div style=""><span style="font-size:12pt">21</span><span style="font-size:12pt">在</span><span style="font-size:12pt">a</span><span style="font-size:12pt">中的位置：</span><span style="font-size:12pt">-7</span></div> <div style=""><span style="font-size:12pt">121</span><span style="font-size:12pt">在</span><span style="font-size:12pt">a</span><span style="font-size:12pt">中的位置：</span><span style="font-size:12pt">-10</span></div> <div style=""><span style="font-size:12pt">上例中，</span><span style="font-size:12pt">20</span><span style="font-size:12pt">在数组</span><span style="font-size:12pt">a</span><span style="font-size:12pt">的第</span><span style="font-size:12pt">5</span><span style="font-size:12pt">个位置。</span><span style="font-size:12pt">21</span><span style="font-size:12pt">不在数组中，如果要将</span><span style="font-size:12pt">21</span><span style="font-size:12pt">插入数组</span><span style="font-size:12pt">a</span><span style="font-size:12pt">中，</span><span style="font-size:12pt">-7=-(insert_point+1</span><span style="font-size:12pt">），插入的位置为</span><span style="font-size:12pt">6</span><span style="font-size:12pt">。</span></div> <div style=""><span style="font-size:12pt">提示：设计程序时要考虑数组</span><span style="font-size:12pt">a</span><span style="font-size:12pt">是升序还是降序。</span></div></td></tr><tr><td><div style=""><span style="font-size:12pt;font-family:Tahoma">三</span><span style="font-size:12pt;font-family:Tahoma">、实验</span><span style="font-size:12pt;font-family:Tahoma">软硬件环境</span></div> <div style="">Cmd命令框、java</div></td></tr><tr><td><div style=""><span style="font-size:12pt;font-family:Tahoma">四</span><span style="font-size:12pt;font-family:Tahoma">、</span><span style="font-size:12pt;font-family:Tahoma">实验过程（实验步骤、记录、数据、分析）</span></div> <div style="">1.代码思路：</div> <div style="">代码和注释：</div> <div style="">package Test01;</div> <div style="">import java.util.*;</div> <div style="">import java.io.*;</div> <div style="">public class Test1_1</div> <div style="">{</div> <div style="">    public static void main(String [] args)throws IOException</div> <div style="">    {</div> <div style="">        // 创建Scanner对象用于读取用户输入</div> <div style="">        Scanner reader=new Scanner(System.in);</div> <div style="">        int num1, num2;</div> <div style="">        int result=0; // 定义一个整数变量result用于存储num1的所有因数之和</div> <div style="">        System.out.print(&quot;请输入一个整数：&quot;);</div> <div style="">        num1=reader.nextInt(); // 读取用户输入的整数并赋值给num1</div> <div style="">        // 遍历从1到num1-1的所有整数，检查它们是否是num1的因数</div> <div style="">        for(int i=1; i&lt;num1; i++){</div> <div style="">            num2=num1%i; // 计算num1除以i的余数</div> <div style="">            if(num2==0){ // 如果余数为0，说明i是num1的因数</div> <div style="">                result+=i; // 将i累加到result中</div> <div style="">            }</div> <div style="">        }</div> <div style="">        System.out.println(num1+&quot;的所有因数之和为：&quot;+result);</div> <div style="">        if(result==num1){</div> <div style="">            System.out.println(num1+&quot;为完全数&quot;);</div> <div style="">        } else {</div> <div style="">            System.out.println(num1+&quot;不是完全数&quot;);</div> <div style="">        }</div> <div style="">    }</div> <div style="">}</div> <div style="">2.代码思路：</div> <div style="">代码和注释：</div> <div style="">package test01;</div> <div style="">import java.util.*;</div> <div style="">import java.io.*;</div> <div style="">public class Test1_2 {</div> <div style="">    // main方法是程序的入口点，它接受一个字符串数组作为参数</div> <div style="">    public static void main(String[] args) throws IOException {</div> <div style="">        int num, num1, num2, num3, num4;</div> <div style="">        int result = 0;</div> <div style="">        String str1;</div> <div style="">        BufferedReader buf;</div> <div style="">        buf = new BufferedReader(new InputStreamReader(System.in));</div> <div style="">        System.out.print(&quot;请输入一个正整数：&quot;);</div> <div style="">        str1 = buf.readLine();</div> <div style="">        num = Integer.parseInt(str1);</div> <div style="">        num1 = str1.length();</div> <div style="">        // 如果输入的数字是两位数，则输出&quot;两位数不存在自幂数&quot;</div> <div style="">        if (num &gt; 9 &amp;&amp; num &lt; 99) {</div> <div style="">            System.out.print(&quot;两位数不存在自幂数&quot;);</div> <div style="">        } else {</div> <div style="">            // 遍历数字的每一位</div> <div style="">            for (int i = 0; i &lt; num1; i++) {</div> <div style="">                num2 = (int) Math.pow(10, num1 - i);</div> <div style="">                num3 = ((num % num2) - (num % ((int) Math.pow(10, num1 - i - 1)))) / (int) Math.pow(10, num1 - i - 1);</div> <div style="">                System.out.println(num + &quot;的第&quot; + (i + 1) + &quot;位为：&quot; + num3);</div> <div style="">                num4 = (int) Math.pow(num3, num1);</div> <div style="">                result += num4;</div> <div style="">            }</div> <div style="">            System.out.println(num + &quot;的各位数字的&quot; + num1 + &quot;次方之和为：&quot; + result);</div> <div style="">            // 检查这个和是否等于原始数字</div> <div style="">            if (result == num) {</div> <div style="">                System.out.println(num + &quot;为自幂数&quot;);</div> <div style="">                // 根据数字位数输出对应的特殊名称</div> <div style="">                switch (num1) {</div> <div style="">                    case 1:</div> <div style="">                        System.out.println(num + &quot;为独身数&quot;);</div> <div style="">                        break;</div> <div style="">                    case 3:</div> <div style="">                        System.out.println(num + &quot;为水仙花数&quot;);</div> <div style="">                        break;</div> <div style="">                    case 4:</div> <div style="">                        System.out.println(num + &quot;为四叶玫瑰花数&quot;);</div> <div style="">                        break;</div> <div style="">                    case 5:</div> <div style="">                        System.out.println(num + &quot;为五角星数&quot;);</div> <div style="">                        break;</div> <div style="">                    case 6:</div> <div style="">                        System.out.println(num + &quot;为六合数&quot;);</div> <div style="">                        break;</div> <div style="">                    case 7:</div> <div style="">                        System.out.println(num + &quot;为北斗七星数&quot;);</div> <div style="">                        break;</div> <div style="">                    case 8:</div> <div style="">                        System.out.println(num + &quot;为八仙数&quot;);</div> <div style="">                        break;</div> <div style="">                    case 9:</div> <div style="">                        System.out.println(num + &quot;为九九重阳数&quot;);</div> <div style="">                        break;</div> <div style="">                    case 10:</div> <div style="">                        System.out.println(num + &quot;为十全十美数&quot;);</div> <div style="">                        break;</div> <div style="">                    default:</div> <div style="">                        System.out.print(&quot;输入超过十位的正整数！&quot;);</div> <div style="">                }</div> <div style="">            } else {</div> <div style="">                System.out.println(num + &quot;不是自幂数&quot;);</div> <div style="">            }</div> <div style="">        }</div> <div style="">    }</div> <div style="">}</div> <div style="">3.代码思路：</div> <div style="">代码和注释：</div> <div style="">package test01;</div> <div style="">import java.util.*;</div> <div style="">import java.io.*;</div> <div style="">import java.util.Arrays;</div> <div style="">public class Test1_3 {</div> <div style="">    public static void main(String[] args) throws IOException {</div> <div style="">        int[] arr;</div> <div style="">        int num1, m, n;</div> <div style="">        int first, last, target, length;</div> <div style="">        Scanner reader = new Scanner(System.in); // 创建一个Scanner对象用于读取用户输入</div> <div style="">        System.out.print(&quot;请输入数组的长度为：&quot;);</div> <div style="">        length = reader.nextInt(); // 读取用户输入的数组长度并赋值给length</div> <div style="">        arr = new int[length]; // 根据length创建一个新的整型数组arr</div> <div style="">        System.out.print(&quot;请输入数组元素：&quot;);</div> <div style="">        for (int i = 0; i &lt; length; i++) { // 遍历数组，接收用户输入的每个元素</div> <div style="">            arr[i] = reader.nextInt(); // 将用户输入的元素赋值给数组arr的第i个位置</div> <div style="">        }</div> <div style="">        Arrays.sort(arr); // 对数组arr进行排序</div> <div style="">        System.out.print(&quot;该数组元素为：&quot;);</div> <div style="">        for (int a : arr) // 使用增强for循环遍历数组arr</div> <div style="">            System.out.println(a + &quot;    &quot;); // 输出数组元素并在每个元素后添加空格</div> <div style="">        first = 0; // 初始化first为0，表示数组的第一个元素的索引</div> <div style="">        last = (length - 1); // 初始化last为length-1，表示数组的最后一个元素的索引</div> <div style="">        System.out.println(&quot;数组的第一个元素为：&quot; + arr[first]);</div> <div style="">        System.out.println(&quot;数组的最后一个元素为：&quot; + arr[last]);</div> <div style="">        System.out.print(&quot;请输入要查找的元素：&quot;);</div> <div style="">        target = reader.nextInt(); // 读取用户输入的目标值并赋值给target</div> <div style="">        System.out.println(target + &quot;在x的位置为：&quot; + binarySearch(arr, first, last, target)); // 调用binarySearch()方法查找目标值，并输出结果</div> <div style="">    }</div> <div style="">    // 定义一个递归函数binarySearch()，用于在已排序的数组arr中查找目标值target</div> <div style="">    public static int binarySearch(int[] x, int first, int last, int target) {</div> <div style="">        if (first &gt; last) { // 如果first大于last，说明目标值不存在于数组中</div> <div style="">            return (-first - 1); // 返回一个负数表示未找到目标值</div> <div style="">        }</div> <div style="">        int mid = (int) (first + last) / 2; // 计算中间索引mid</div> <div style="">        int arr1 = x[mid]; // 获取数组arr中索引为mid的元素</div> <div style="">        if (target &gt; x[mid]) { // 如果目标值大于中间元素，则在右半部分继续查找</div> <div style="">            return binarySearch(x, mid + 1, last, target);</div> <div style="">        } else if (target &lt; x[mid]) { // 如果目标值小于中间元素，则在左半部分继续查找</div> <div style="">            return binarySearch(x, first, mid - 1, target);</div> <div style="">        } else return mid; // 如果目标值等于中间元素，则返回中间索引mid</div> <div style="">    }</div> <div style="">}</div></td></tr><tr><td></td></tr><tr><td><div style=""><span style="font-size:12pt;font-family:Tahoma">五</span><span style="font-size:12pt;font-family:Tahoma">、</span><span style="font-size:12pt;font-family:Tahoma">测试</span><span style="font-size:12pt;font-family:Tahoma">/</span><span style="font-size:12pt;font-family:Tahoma">调试及</span><span style="font-size:12pt;font-family:Tahoma">实验</span><span style="font-size:12pt;font-family:Tahoma">结果分析</span></div></td></tr><tr><td><div style=""><span style="font-size:12pt;font-family:Tahoma">六</span><span style="font-size:12pt;font-family:Tahoma">、实验</span><span style="font-size:12pt;font-family:Tahoma">结论与体会</span></div> <div style=""><span style="font-family:宋体;SimSun">年    月    日</span></div></td></tr></table></div></div>
+</article>
+</main>
+<footer class="footer">
+  <p>&copy; 2026 Alan's Blog. Powered by curiosity.</p>
+</footer>
+<div class="back-to-top" id="backToTop">▲</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-php.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+<script>
+// 一键复制代码
+function copyCode(btn) {{
+  var block = btn.closest('.code-block') || btn.closest('.inline-code-block');
+  var code = block.querySelector('code').innerText;
+  navigator.clipboard.writeText(code).then(function() {{
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(function() {{ btn.textContent = 'Copy'; btn.classList.remove('copied'); }}, 2000);
+  }}).catch(function() {{
+    // fallback
+    var ta = document.createElement('textarea');
+    ta.value = code;
+    ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(function() {{ btn.textContent = 'Copy'; btn.classList.remove('copied'); }}, 2000);
+  }});
+}}
+
+// 自动包装连续的代码段落为整体代码块并添加复制按钮
+document.addEventListener('DOMContentLoaded', function() {{
+  var all = document.querySelectorAll('.article-body > p[data-code="true"]');
+  if (!all.length) return;
+  // 分组连续段落
+  var groups = [];
+  var cur = [];
+  all.forEach(function(p) {{
+    if (cur.length === 0 || p.previousElementSibling === cur[cur.length - 1]) {{
+      cur.push(p);
+    }} else {{
+      groups.push(cur);
+      cur = [p];
+    }}
+  }});
+  if (cur.length) groups.push(cur);
+  // 每组包装为一个代码块
+  groups.forEach(function(grp) {{
+    var codes = grp.map(function(p) {{ return p.innerHTML.trim(); }}).join('
+');
+    if (!codes) return;
+    var wrapper = document.createElement('div');
+    wrapper.className = 'inline-code-block';
+    wrapper.innerHTML = '<div class="code-header"><span class="code-lang">Code</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div><pre><code>' + codes + '</code></pre></div>';
+    grp[0].parentNode.insertBefore(wrapper, grp[0]);
+    grp.forEach(function(p) {{ p.parentNode.removeChild(p); }});
+  }});
+  if (typeof Prism !== 'undefined') {{
+    Prism.highlightAll();
+  }}
+}});
+</script>
+<script src="../js/interactions.js"></script>
+<script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</body>
+</html>

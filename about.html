@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' cdnjs.cloudflare.com busuanzi.ibruce.info; style-src 'self' 'unsafe-inline' fonts.googleapis.com cdnjs.cloudflare.com; font-src 'self' fonts.gstatic.com; img-src 'self' data: https:; frame-ancestors 'none'; connect-src 'self' busuanzi.ibruce.info;">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="//busuanzi.ibruce.info">
+<title>About Me - Alan's Blog</title>
+<link rel="stylesheet" href="css/style.css">
+<script>
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  const prismTheme = document.getElementById('prism-theme');
+  if (theme === 'dark') {
+    prismTheme.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css';
+  } else {
+    prismTheme.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css';
+  }
+  localStorage.setItem('blog-theme', theme);
+}
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') || 'light';
+  const next = current === 'light' ? 'dark' : 'light';
+  applyTheme(next);
+}
+document.addEventListener('DOMContentLoaded', function() {
+  const saved = localStorage.getItem('blog-theme');
+  if (saved) { applyTheme(saved); } else { applyTheme('dark'); }
+});
+</script>
+<link rel="stylesheet" id="prism-theme" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+</head>
+<body>
+<div class="container">
+<header class="header">
+  <div class="logo"><span class="terminal-icon">></span> Alan's <span class="accent">Blog</span></div>
+  <nav><a href="index.html">HOME</a><a href="index.html#courses">COURSES</a><a href="about.html" class="nav-active">ABOUT</a><button class="theme-toggle" onclick="toggleTheme()" title="切换主题">&#9788;</button></nav>
+</header>
+<div class="about-page">
+  <section class="about-hero">
+    <div class="about-avatar">&#128526;</div>
+    <h1>About <span class="accent">Me</span></h1>
+    <p class="about-subtitle">一名软件工程网络安全方向的学生，热爱技术，乐于分享。</p>
+  </section>
+
+  <div class="about-grid">
+    <div class="about-card reveal">
+      <h2>&#128100; 个人简介</h2>
+      <p>我是一名软件工程专业网络安全方向的学生，专注于 Web 安全、渗透测试和网络安全分析。我相信技术的力量在于分享，因此通过这个博客记录自己的学习过程、实验成果与安全研究心得，希望与志同道合的朋友共同成长。</p>
+    </div>
+
+    <div class="about-card reveal">
+      <h2>&#128736; 技术栈</h2>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">PHP</span>
+        <span class="skill-tag">C/C++</span>
+        <span class="skill-tag">Java</span>
+        <span class="skill-tag">HTML/CSS</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">Web 安全</span>
+        <span class="skill-tag">渗透测试</span>
+        <span class="skill-tag">漏洞挖掘</span>
+        <span class="skill-tag">信息隐藏</span>
+        <span class="skill-tag">Burp Suite</span>
+        <span class="skill-tag">Wireshark</span>
+        <span class="skill-tag">Nmap</span>
+        <span class="skill-tag">SQLMap</span>
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">Linux</span>
+        <span class="skill-tag">数据结构</span>
+        <span class="skill-tag">算法</span>
+      </div>
+    </div>
+
+    <div class="about-card reveal">
+      <h2>&#128221; 博客定位</h2>
+      <ul class="about-list">
+        <li>记录课堂实验报告与项目成果</li>
+        <li>分享安全研究心得与漏洞复现经验</li>
+        <li>整理学习笔记，构建个人知识体系</li>
+      </ul>
+    </div>
+
+    <div class="about-card reveal">
+      <h2>&#128218; 学习经历</h2>
+      <ul class="about-list">
+        <li><strong>SRC 漏洞挖掘</strong> — 参与漏洞提交平台实战，发现并提交了文件上传、CSRF、弱口令等多个安全漏洞</li>
+        <li><strong>课程实训项目</strong> — 完成图书信息管理系统等课程设计，涵盖前后端开发与数据库设计</li>
+        <li><strong>ACM 算法竞赛</strong> — 参与算法训练，掌握常用数据结构与算法设计思想</li>
+      </ul>
+    </div>
+
+    <div class="about-card reveal">
+      <h2>&#128279; 联系方式</h2>
+      <div class="about-links">
+        <a href="https://github.com/alanishere-hacker" target="_blank" rel="noopener noreferrer" class="about-link">
+          <span class="about-link-icon">&#128187;</span>
+          <span>GitHub</span>
+          <span class="about-link-hint">alanishere-hacker</span>
+        </a>
+        <a href="https://blog.csdn.net/2301_81703168?type=blog" target="_blank" rel="noopener noreferrer" class="about-link">
+          <span class="about-link-icon">&#9997;</span>
+          <span>CSDN 博客</span>
+          <span class="about-link-hint">2301_81703168</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="about-card about-motto reveal">
+      <div class="motto-text">"Stay curious, stay secure."</div>
+      <div class="motto-sub">—— 保持好奇，保持安全</div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <p>&copy; 2025 Alan's Blog. Powered by curiosity.</p>
+</footer>
+</div>
+<script defer src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="js/interactions.js"></script>
+</body>
+</html>

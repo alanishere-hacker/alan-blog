@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' cdnjs.cloudflare.com busuanzi.ibruce.info; style-src 'self' 'unsafe-inline' fonts.googleapis.com cdnjs.cloudflare.com; font-src 'self' fonts.gstatic.com; img-src 'self' data: https:; frame-ancestors 'none'; connect-src 'self' busuanzi.ibruce.info;">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://busuanzi.ibruce.info">
+<title>Linux实验 - Alan's Blog</title>
+<link rel="stylesheet" href="../css/style.css">
+<script>
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  const prismTheme = document.getElementById('prism-theme');
+  if (theme === 'dark') {
+    prismTheme.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css';
+  } else {
+    prismTheme.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css';
+  }
+  localStorage.setItem('blog-theme', theme);
+}
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') || 'light';
+  const next = current === 'light' ? 'dark' : 'light';
+  applyTheme(next);
+}
+document.addEventListener('DOMContentLoaded', function() {
+  const saved = localStorage.getItem('blog-theme');
+  if (saved) { applyTheme(saved); } else { applyTheme('dark'); }
+});
+</script>
+<link rel="stylesheet" id="prism-theme" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+</head>
+<body>
+<div class="container">
+<header class="header">
+  <div class="logo"><span class="terminal-icon">></span> Alan's <span class="accent">Blog</span></div>
+  <nav><a href="../index.html">HOME</a><a href="../about.html">ABOUT</a><button class="theme-toggle" onclick="toggleTheme()" title="切换主题">&#9788;</button></nav>
+</header>
+<main>
+<section class="category-page">
+  <h2 class="section-title reveal">Linux实验 <span class="count">(8 篇)</span></h2>
+  <div class="card-grid"><a href="../articles/Linux实验_1.html" class="article-card reveal">
+  <div class="card-thumb" style="background:#00ccff">进阶</div>
+  <div class="card-content">
+    <div class="card-header">
+      <span class="card-diff" style="background:#00ccff">进阶</span>
+      <span class="card-readtime">&#9201; 4 min</span>
+    </div>
+    <h3 class="card-title">Linux下GCC编译器与GDB调试工具使用</h3>
+    <div class="card-footer">
+      <span class="card-date">&#128197; 2026-07-19</span>
+    </div>
+  </div>
+</a><a href="../articles/Linux实验_2.html" class="article-card reveal">
+  <div class="card-thumb" style="background:#00ccff">进阶</div>
+  <div class="card-content">
+    <div class="card-header">
+      <span class="card-diff" style="background:#00ccff">进阶</span>
+      <span class="card-readtime">&#9201; 6 min</span>
+    </div>
+    <h3 class="card-title">Linux文件查找、链接与打包压缩操作</h3>
+    <div class="card-footer">
+      <span class="card-date">&#128197; 2026-07-19</span>
+    </div>
+  </div>
+</a><a href="../articles/Linux实验_3.html" class="article-card reveal">
+  <div class="card-thumb" style="background:#00ccff">进阶</div>
+  <div class="card-content">
+    <div class="card-header">
+      <span class="card-diff" style="background:#00ccff">进阶</span>
+      <span class="card-readtime">&#9201; 3 min</span>
+    </div>
+    <h3 class="card-title">Linux文件目录管理与进程控制命令</h3>
+    <div class="card-footer">
+      <span class="card-date">&#128197; 2026-07-19</span>
+    </div>
+  </div>
+</a><a href="../articles/Linux实验_4.html" class="article-card reveal">
+  <div class="card-thumb" style="background:#00ccff">进阶</div>
+  <div class="card-content">
+    <div class="card-header">
+      <span class="card-diff" style="background:#00ccff">进阶</span>
+      <span class="card-readtime">&#9201; 5 min</span>
+    </div>
+    <h3 class="card-title">Linux Shell通配符与输入输出重定向</h3>
+    <div class="card-footer">
+      <span class="card-date">&#128197; 2026-07-19</span>
+    </div>
+  </div>
+</a><a href="../articles/Linux实验_5.html" class="article-card reveal">
+  <div class="card-thumb" style="background:#00ccff">进阶</div>
+  <div class="card-content">
+    <div class="card-header">
+      <span class="card-diff" style="background:#00ccff">进阶</span>
+      <span class="card-readtime">&#9201; 4 min</span>
+    </div>
+    <h3 class="card-title">Linux磁盘管理及FTP与Apache服务配置</h3>
+    <div class="card-footer">
+      <span class="card-date">&#128197; 2026-07-19</span>
+    </div>
+  </div>
+</a><a href="../articles/Linux实验_6.html" class="article-card reveal">
+  <div class="card-thumb" style="background:#00ccff">进阶</div>
+  <div class="card-content">
+    <div class="card-header">
+      <span class="card-diff" style="background:#00ccff">进阶</span>
+      <span class="card-readtime">&#9201; 7 min</span>
+    </div>
+    <h3 class="card-title">Linux Shell脚本编程与变量控制结构</h3>
+    <div class="card-footer">
+      <span class="card-date">&#128197; 2026-07-19</span>
+    </div>
+  </div>
+</a><a href="../articles/Linux实验_7.html" class="article-card reveal">
+  <div class="card-thumb" style="background:#00ccff">进阶</div>
+  <div class="card-content">
+    <div class="card-header">
+      <span class="card-diff" style="background:#00ccff">进阶</span>
+      <span class="card-readtime">&#9201; 6 min</span>
+    </div>
+    <h3 class="card-title">Vi编辑器与Linux文件权限及用户管理</h3>
+    <div class="card-footer">
+      <span class="card-date">&#128197; 2026-07-19</span>
+    </div>
+  </div>
+</a><a href="../articles/Linux实验_0.html" class="article-card reveal">
+  <div class="card-thumb" style="background:#00ccff">进阶</div>
+  <div class="card-content">
+    <div class="card-header">
+      <span class="card-diff" style="background:#00ccff">进阶</span>
+      <span class="card-readtime">&#9201; 2 min</span>
+    </div>
+    <h3 class="card-title">Linux虚拟机配置与系统安装实践</h3>
+    <div class="card-footer">
+      <span class="card-date">&#128197; 2025-10-20</span>
+    </div>
+  </div>
+</a></div>
+  
+</section>
+</main>
+<footer class="footer">
+  <p>&copy; 2026 Alan's Blog. Powered by curiosity.</p>
+</footer>
+<div class="back-to-top" id="backToTop">▲</div>
+</div>
+<script src="../js/interactions.js"></script>
+<script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</body>
+</html>

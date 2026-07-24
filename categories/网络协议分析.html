@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' cdnjs.cloudflare.com busuanzi.ibruce.info; style-src 'self' 'unsafe-inline' fonts.googleapis.com cdnjs.cloudflare.com; font-src 'self' fonts.gstatic.com; img-src 'self' data: https:; frame-ancestors 'none'; connect-src 'self' busuanzi.ibruce.info;">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://busuanzi.ibruce.info">
+<title>网络协议分析 - Alan's Blog</title>
+<link rel="stylesheet" href="../css/style.css">
+<script>
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  const prismTheme = document.getElementById('prism-theme');
+  if (theme === 'dark') {
+    prismTheme.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css';
+  } else {
+    prismTheme.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css';
+  }
+  localStorage.setItem('blog-theme', theme);
+}
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') || 'light';
+  const next = current === 'light' ? 'dark' : 'light';
+  applyTheme(next);
+}
+document.addEventListener('DOMContentLoaded', function() {
+  const saved = localStorage.getItem('blog-theme');
+  if (saved) { applyTheme(saved); } else { applyTheme('dark'); }
+});
+</script>
+<link rel="stylesheet" id="prism-theme" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+</head>
+<body>
+<div class="container">
+<header class="header">
+  <div class="logo"><span class="terminal-icon">></span> Alan's <span class="accent">Blog</span></div>
+  <nav><a href="../index.html">HOME</a><a href="../about.html">ABOUT</a><button class="theme-toggle" onclick="toggleTheme()" title="切换主题">&#9788;</button></nav>
+</header>
+<main>
+<section class="category-page">
+  <h2 class="section-title reveal">网络协议分析 <span class="count">(4 篇)</span></h2>
+  <div class="card-grid"><a href="../articles/网络协议分析_85.html" class="article-card reveal">
+  <div class="card-thumb" style="background:#007acc">高级</div>
+  <div class="card-content">
+    <div class="card-header">
+      <span class="card-diff" style="background:#007acc">高级</span>
+      <span class="card-readtime">&#9201; 9 min</span>
+    </div>
+    <h3 class="card-title">ICMP路由重定向与动态路由协议：RIP和OSPF抓包分析</h3>
+    <div class="card-footer">
+      <span class="card-date">&#128197; 2025-11-12</span>
+    </div>
+  </div>
+</a><a href="../articles/网络协议分析_86.html" class="article-card reveal">
+  <div class="card-thumb" style="background:#007acc">高级</div>
+  <div class="card-content">
+    <div class="card-header">
+      <span class="card-diff" style="background:#007acc">高级</span>
+      <span class="card-readtime">&#9201; 4 min</span>
+    </div>
+    <h3 class="card-title">VLAN Trunk与ARP协议分析：跨交换机通信与地址解析</h3>
+    <div class="card-footer">
+      <span class="card-date">&#128197; 2025-11-12</span>
+    </div>
+  </div>
+</a><a href="../articles/网络协议分析_87.html" class="article-card reveal">
+  <div class="card-thumb" style="background:#007acc">高级</div>
+  <div class="card-content">
+    <div class="card-header">
+      <span class="card-diff" style="background:#007acc">高级</span>
+      <span class="card-readtime">&#9201; 8 min</span>
+    </div>
+    <h3 class="card-title">DHCP与NAT协议配置：动态地址分配与内外网地址转换</h3>
+    <div class="card-footer">
+      <span class="card-date">&#128197; 2025-11-12</span>
+    </div>
+  </div>
+</a><a href="../articles/网络协议分析_84.html" class="article-card reveal">
+  <div class="card-thumb" style="background:#007acc">高级</div>
+  <div class="card-content">
+    <div class="card-header">
+      <span class="card-diff" style="background:#007acc">高级</span>
+      <span class="card-readtime">&#9201; 5 min</span>
+    </div>
+    <h3 class="card-title">GNS3综合组网实验：VLAN划分、RIP路由与CIDR地址分配</h3>
+    <div class="card-footer">
+      <span class="card-date">&#128197; 2025-11-08</span>
+    </div>
+  </div>
+</a></div>
+  
+</section>
+</main>
+<footer class="footer">
+  <p>&copy; 2026 Alan's Blog. Powered by curiosity.</p>
+</footer>
+<div class="back-to-top" id="backToTop">▲</div>
+</div>
+<script src="../js/interactions.js"></script>
+<script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</body>
+</html>

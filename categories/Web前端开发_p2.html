@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' cdnjs.cloudflare.com busuanzi.ibruce.info; style-src 'self' 'unsafe-inline' fonts.googleapis.com cdnjs.cloudflare.com; font-src 'self' fonts.gstatic.com; img-src 'self' data: https:; frame-ancestors 'none'; connect-src 'self' busuanzi.ibruce.info;">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="//busuanzi.ibruce.info">
+<title>Web前端开发 - Alan's Blog</title>
+<link rel="stylesheet" href="../css/style.css">
+<script>
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  const prismTheme = document.getElementById('prism-theme');
+  if (theme === 'dark') {
+    prismTheme.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css';
+  } else {
+    prismTheme.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css';
+  }
+  localStorage.setItem('blog-theme', theme);
+}
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') || 'light';
+  const next = current === 'light' ? 'dark' : 'light';
+  applyTheme(next);
+}
+document.addEventListener('DOMContentLoaded', function() {
+  const saved = localStorage.getItem('blog-theme');
+  if (saved) { applyTheme(saved); } else { applyTheme('dark'); }
+});
+</script>
+<link rel="stylesheet" id="prism-theme" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+</head>
+<body>
+<div class="container">
+<header class="header">
+  <div class="logo"><span class="terminal-icon">></span> Alan's <span class="accent">Blog</span></div>
+  <nav><a href="../index.html">HOME</a><a href="../about.html">ABOUT</a><button class="theme-toggle" onclick="toggleTheme()" title="切换主题">&#9788;</button></nav>
+</header>
+<main>
+<section class="category-page">
+  <h2 class="section-title reveal">Web前端开发 <span class="count">(14 篇)</span></h2>
+  <div class="card-grid"><a href="../articles/Web前端开发_100.html" class="article-card reveal">
+  <div class="card-thumb" style="background:#00cc88">基础</div>
+  <div class="card-content">
+    <div class="card-header">
+      <span class="card-diff" style="background:#00cc88">基础</span>
+      <span class="card-readtime">&#9201; 1 min</span>
+    </div>
+    <h3 class="card-title">CSS弹性盒子与网格布局：表单与页面元素排版实践</h3>
+    <div class="card-footer">
+      <span class="card-date">&#128197; 2024-05-07</span>
+    </div>
+  </div>
+</a><a href="../articles/Web前端开发_96.html" class="article-card reveal">
+  <div class="card-thumb" style="background:#00cc88">基础</div>
+  <div class="card-content">
+    <div class="card-header">
+      <span class="card-diff" style="background:#00cc88">基础</span>
+      <span class="card-readtime">&#9201; 1 min</span>
+    </div>
+    <h3 class="card-title">CSS绝对定位与相对定位：图片文字叠加布局实践</h3>
+    <div class="card-footer">
+      <span class="card-date">&#128197; 2024-04-22</span>
+    </div>
+  </div>
+</a><a href="../articles/Web前端开发_98.html" class="article-card reveal">
+  <div class="card-thumb" style="background:#00cc88">基础</div>
+  <div class="card-content">
+    <div class="card-header">
+      <span class="card-diff" style="background:#00cc88">基础</span>
+      <span class="card-readtime">&#9201; 1 min</span>
+    </div>
+    <h3 class="card-title">CSS浮动定位与页面布局：经典多栏式网页结构设计</h3>
+    <div class="card-footer">
+      <span class="card-date">&#128197; 2024-04-07</span>
+    </div>
+  </div>
+</a><a href="../articles/Web前端开发_95.html" class="article-card reveal">
+  <div class="card-thumb" style="background:#00cc88">基础</div>
+  <div class="card-content">
+    <div class="card-header">
+      <span class="card-diff" style="background:#00cc88">基础</span>
+      <span class="card-readtime">&#9201; 1 min</span>
+    </div>
+    <h3 class="card-title">HTML表单与超链接：常用站点导航页面与表单设计</h3>
+    <div class="card-footer">
+      <span class="card-date">&#128197; 2024-03-20</span>
+    </div>
+  </div>
+</a></div>
+  <nav class="pagination"><a href="Web前端开发.html" class="page-btn page-arrow" title="上一页">&laquo;</a><a href="Web前端开发.html" class="page-btn">1</a><span class="page-btn active">2</span><span class="page-btn page-arrow disabled" title="下一页">&raquo;</span><span class="page-info">共 14 篇 / 2 页</span></nav>
+</section>
+</main>
+<footer class="footer">
+  <p>&copy; 2026 Alan's Blog. Powered by curiosity.</p>
+</footer>
+<div class="back-to-top" id="backToTop">▲</div>
+</div>
+<script src="../js/interactions.js"></script>
+<script defer src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</body>
+</html>
